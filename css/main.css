@@ -1,0 +1,34 @@
+@font-face{
+    font-family: NanumGothic;
+    src:url(../font/NanumGothic-Bold.ttf);
+}
+body{
+    font-family: NanumGothic;
+    color: white;
+    background-color: #333;
+}
+#inicio{
+    background: url(../img/investor.png);
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed; 
+}
+.inicio{
+    padding-top: 200px;
+}
+.dark-overlay{
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+.navbar{
+    border-bottom: #5dbaf0ea 3px solid;
+    opacity: .8;
+}
+.navbar-toggler-icon{
+    color: #5dbaf0ea;
+
+}
