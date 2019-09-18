@@ -41,21 +41,29 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 d-none d-sm-block">
-                            <h1 class="display-4"> Lorem ipsum dolor sit. </h1>
+                            <h1 class="display-4 titulo"> Lorem ipsum dolor sit. </h1>
                             <div class="d-flex flex-row">
-                                <div class="0-4 align-self-start">
-                                    <i class="fab fa-wolf-pack-battalion"></i>
+                                <div class="0-4 parrafo align-self-start">
+                                    <p> <i class="fab fa-wolf-pack-battalion"></i>Lorem ipsum dolor sit, amet
+                                        consectetur adipisicing elit. Magni expedita
+                                        consequatur quis sequi cupiditate ipsa parra dignissimos quibusdam laudantium
+                                        rerum
+                                        ipsam. Expedita soluta assumenda cumque dolores nisi? Non possimus est vero!</p>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row">
+                            <div class="d-flex parrafo flex-row">
                                 <div class="0-4 align-self-start">
-                                    <i class="fab fa-wolf-pack-battalion">lore</i>
+                                    <p> <i class="fab fa-wolf-pack-battalion"></i> Lorem ipsum dolor sit amet
+                                        consectetur adipisicing elit. Incidunt itaque eos
+                                        beatae eum, autem accusantium repellat inventore cumque, quaerat nulla enim,
+                                        corporis pariatur amet magnam placeat. Quis harum inventore a?</p>
+
                                 </div>
                             </div>
 
                         </div>
                         <!-- SEGUNDA COLUMNA -->
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 formulario">
                             <div class="card text-center" style="background: #5dbaf0ea;">
                                 <div class="card-body">
                                     <h3>Lorem ipsum dolor sit.</h3>
@@ -88,7 +96,7 @@
             <div class="row">
                 <div class="col text-center">
 
-                    <div id="info" class="info1 p-5">
+                    <div id="info" class="p-5">
                         <h1 class="display-4   ">Info</h1>
                         <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
                             neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
@@ -127,52 +135,6 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="container1">
-            <div class="row">
-                <div class="col text-center">
-
-                    <div id="contactanos" class="info1 p-5">
-                        <h1 class="display-4">Contactanos</h1>
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-
-                        <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, officiis
-                            neque. Placeat atque magni incidunt molestias sapiente ullam perspiciatis nobis deserunt
-                            labore facilis! Earum odit veritatis quidem, odio vero nam?</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -180,13 +142,27 @@
         window.sr = ScrollReveal();
 
         sr.reveal('.navbar', {
-            duration: 200,
+            duration: 2000,
+            diastance: '200px',
+            origin: 'top'
+        })
+
+        sr.reveal('.titulo', {
+            duration: 3000,
+            diastance: '300px',
             origin: 'bottom'
         })
 
-        sr.reveal('.info1', {
-            duration: 300,
-            origin: 'top'
+        sr.reveal('.parrafo', {
+            duration: 3000,
+            diastance: '300px',
+            origin: 'left'
+        })
+
+        sr.reveal('.formulario', {
+            duration: 3000,
+            diastance: '300px',
+            origin: 'rigth'
         })
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
