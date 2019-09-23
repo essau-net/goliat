@@ -2,14 +2,20 @@
 body {
   background-color: #fff;
   color: #333;
+  padding: 50px;
 }
-
+figure.chart{
+  float: left;
+}
 .containerC {
+  float: left;
   text-align: center;
 }
-
+/* #f0f0f0*/
 .chart figcaption {
+  margin-top: 0;
   padding: 73px 73px;
+  left: 100px;
   width: 100px;
   height: 50px;
   border: 20px solid #f0f0f0;
@@ -38,7 +44,7 @@ body {
 
 .chart svg {
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
 }
 
@@ -168,3 +174,23 @@ body {
   }
 }
 /* END Keyframes for the initial animation */
+
+  grafica{
+    float: left;
+  }
+    button.btn.btn-danger.dotMenu{  
+    width: 10px;
+    height: 40px;
+    background-color:  inherit;
+    border:inherit;
+    padding: 0px;
+    float: left;
+  }
+  .dotMenu{
+    padding-top: 0vh;
+  }
+  .dotMenu:after {
+  content: '\2807';
+  font-size: 30px;
+  color: #bdb4b4d0;
+  }
