@@ -40,13 +40,10 @@ body{
     color: #333;
     background-color: white;
 }
-.size{
-    height: 30px;
-    width: 30px;
-}
-#mapSizse{
-    width: 100%;
-}
-.featurette-divider{
-    background-color: white;
+
+input.btn.btn-outline-light.btn-block{
+    float: left;
+    width: 150px;
+    display: flex;
+    margin-left: 20px;
 }

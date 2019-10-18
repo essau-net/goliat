@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block title %} Usuario-Registro {% endblock %}
+{% block content %}
+<form method="POST">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+            <label for="inputUsuario">Usuario</label>
+            <input type="text" class="form-control" id="inputUsuario" name="usuarioE" placeholder="Usuario">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" class="form-control" id="inputPassword" name="contraUsuario" placeholder="Password">
+            <label for="inputPassword">Confirma tu contraseña</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputNombre">Nombre(s):</label>
+        <input type="text" naem="nombresE" class="form-control" id="inputNombre" name="nombresE"
+            placeholder="Hector Esau">
+    </div>
+    <div class="form-group">
+        <label for="inputApellido">Apellido (s):</label>
+        <input type="text" name="apellidosE" class="form-control" id="inputApellido" name="apellidosE"
+            placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-group">
+        <label for="inputNacimiento">Fecha de nacimiento:</label>
+        <input type="date" name="fechaNacimientoE" class="form-control" id="inputNacimiento" placeholder="Fecha">
+    </div>
+    <div class="form-group">
+        <label for="inputCelular">Numero celular:</label>
+        <input type="number" name="numeroE" class="form-control" id="inputCelular" placeholder="3310284364">
+    </div>
+    <div class="form-group">
+        <label for="inputTrabajo">Trabajo:</label>
+        <input type="text" name="puestoE" class="form-control" id="inputTrabajo" placeholder="Contador">
+    </div>
+    <div class="form-group">
+        <label for="inputTitulo">titulo:</label>
+        <input type="text" name="tituloE" class="form-control" id="inputTitulo" placeholder="">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCiudad">Ciudad</label>
+            <input type="text" name="ciudadE" class="form-control" id="inputCiudad">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputEstado">Estado</label>
+            <input type="text" name="estadoE" class="form-control" id="inputEstado">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputPais">Pais</label>
+            <input type="text" name="paisE" class="form-control" id="inputPais">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Check me out
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+{% endblock%}
