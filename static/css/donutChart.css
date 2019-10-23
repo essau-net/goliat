@@ -1,196 +1,64 @@
-/* Container styles */
-body {
-  background-color: #fff;
-  color: #333;
-  padding: 50px;
+@mixin circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
 }
-figure.chart{
-  float: left;
+
+$size: 200px;
+.progress-pie-chart {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative;
+  &.gt-50 {
+    background-color: #81CE97;
+  }
 }
-.containerC {
-  float: left;
+.ppc-progress {
+  @include circle($size);
+  clip: rect(0, $size, $size, #{$size/2});
+  .ppc-progress-fill {
+    @include circle($size);
+    clip: rect(0, #{$size/2}, $size, 0);
+    background: #81CE97;
+    transform: rotate(60deg);
+  }
+  .gt-50 & {
+    clip: rect(0, #{$size/2}, $size, 0);
+    .ppc-progress-fill {
+      clip: rect(0, $size, $size, #{$size/2});
+      background: #E5E5E5;
+    }
+  }
+}
+.ppc-percents {
+  @include circle(#{$size/1.15});
+  background: #fff;
   text-align: center;
-}
-/* #f0f0f0*/
-.chart figcaption {
-  margin-top: 0;
-  padding: 73px 73px;
-  left: 100px;
-  width: 100px;
-  height: 50px;
-  border: 20px solid #f0f0f0;
-  border-radius: 100px;
-  line-height: 50px;
-}
-
-
-.chart img {
-  position: absolute;
-  max-width: 100px;
-  max-height: 100px;
-  background: white;
-}
-/* END Container styles */
-
-/* Colors for the circles and positions for the graphics */
-.html {
-  top: 50px;
-  left: 60px;
-}
-
-.html + svg .outer {
-  stroke: #e34f26;
-}
-
-.chart svg {
-  position: absolute;
-  top: 0px;
-  left: 0;
-}
-
-.outer {
-  fill: transparent;
-  stroke: #333;
-  stroke-width: 20;
-  stroke-dasharray: 534;
-  transition: stroke-dashoffset 1s;
-  -webkit-animation-play-state: running;
-  
-  /* firefox bug fix - won't rotate at 90deg angles */
-  -moz-transform: rotate(-89deg) translateX(-190px);
-}
-
-.chart:hover .outer {
-  stroke-dashoffset: 534 !important;
-  -webkit-animation-play-state: paused;
-}
-/* END Circle colors and graphic positions */
-
-
-/* Set the initial values for the animation */
-.chart[data-percent='100'] .outer {
-  stroke-dashoffset: 0;
-  -webkit-animation: show100 2s;
-  animation: show100 2s;
-}
-
-.chart[data-percent='75'] .outer {
-  stroke-dashoffset: 133;
-  -webkit-animation: show75 2s;
-  animation: show75 2s;
-}
-
-.chart[data-percent='50'] .outer {
-  stroke-dashoffset: 267;
-  -webkit-animation: show50 2s;
-  animation: show50 2s;
-}
-
-.chart[data-percent='25'] .outer {
-  stroke-dashoffset: 401;
-  -webkit-animation: show25 2s;
-  animation: show25 2s;
-}
-/* END set initial animation values */
-
-/* Keyframes for the initial animation */
-@-webkit-keyframes show100 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 0;
+  display: table;
+  span {
+    display: block;
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #81CE97;
   }
 }
-
-@keyframes show100 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 0;
-  }
+.pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
 }
 
-@-webkit-keyframes show75 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 134;
-  }
-}
 
-@keyframes show75 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 124;
-  }
-}
 
-@-webkit-keyframes show50 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 267;
-  }
+body {
+  font-family: Arial;
+  background: #f7f7f7;
 }
-
-@keyframes show50 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 267;
-  }
+.progress-pie-chart {
+  margin: 50px auto 0;
 }
-
-@-webkit-keyframes show25 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 401;
-  }
-}
-
-@keyframes show25 {
-  from {
-    stroke-dashoffset: 537;
-  }
-  
-  to {
-    stroke-dashoffset: 401;
-  }
-}
-/* END Keyframes for the initial animation */
-
-  grafica{
-    float: left;
-  }
-    button.btn.btn-danger.dotMenu{  
-    width: 10px;
-    height: 40px;
-    background-color:  inherit;
-    border:inherit;
-    padding: 0px;
-    float: left;
-  }
-  .dotMenu{
-    padding-top: 0vh;
-  }
-  .dotMenu:after {
-  content: '\2807';
-  font-size: 30px;
-  color: #bdb4b4d0;
-  }

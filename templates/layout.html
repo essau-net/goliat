@@ -10,9 +10,11 @@
 
     <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
-    
+    {% block link %} {% endblock %}
+
     <script src="{{ url_for('static', filename = 'js/all.js') }}"></script>
     <script src="{{ url_for('static',filename ='js/scrollreveal.min.js') }}"></script>
+    {% block script%} {% endblock %}
 </head>
 
 <body>

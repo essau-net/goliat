@@ -43,16 +43,18 @@ def register():
 
 @goliatApp.route('/login', methods=["GET", "POST"])
 def login():
-    if request == 'POST':
-        usuario = request.form['usuarioN']
+    if request.method == 'POST':
+        usuario = request.form['usuarioE']
         clave = request.form['contraUsuario'].encode('utf-8')
         selUsuario = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         selUsuario.execute(
-            "SELECT * FROM empleado WHERE usuarioN = %s", (usuario,))
+            "SELECT * FROM empleado WHERE usuarioE = %s", (usuario,))
         u = selUsuario.fetchone()
+        selUsuario.close()
         if u is not None:
             if bcrypt.hashpw(clave, u["contraUsuario"].encode('utf-8')) == u["contraUsuario"].encode('utf-8'):
-                session["nomE"] = u["nomE"]
+                session["nombresE"] = u["nombresE"] 
+                session["appellidosE"] = u["apellidosE"]
                 return render_template('home.html')
             else:
                 return 'Error: clave incorrecta'
@@ -63,4 +65,5 @@ def login():
 
 
 if __name__ == '__main__':
+    goliatApp.secret_key = 'goliatGana'
     goliatApp.run(port=3000, debug=True)

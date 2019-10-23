@@ -1,70 +1,49 @@
-{%extends 'layout.html'}
+{%extends 'layout.html' %}
+{% block title%} Goliat - home {% endblock%}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css') }}"> {% endblock %}
+{% block script%} {% endblock %}
 {% block content %}
+
 <section class="container">
-        <div class="row">
-
-            <div class="col-lg-3 col-md-3">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="#"> <i class="fa fa-home fa-fw"></i> Home</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link"> <i class="fa fa-list-alt fa-fw"></i> Widgets</a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-9 col-md-9">
-                <div class="grafica">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dotMenu" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </div>
-                    <div class="containerC">
-                        <!-- HTML Chart -->
-                        <figure class="chart" data-percent="75">
-                            <figcaption>HTML</figcaption>
-                            <img class="html" src="https://dl.dropboxusercontent.com/s/68gv23q4y5qyq52/html5.svg">
-                            <svg width="200" height="200">
-                                <circle class="outer" cx="98" cy="107" r="85" transform="rotate(-90, 95, 95)" />
-                            </svg>
-                        </figure>
-                    </div>
-                </div>
-                <div class="grafica">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dotMenu" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </div>
-                    <div class="containerC">
-                        <!-- HTML Chart -->
-                        <figure class="chart" data-percent="75">
-                            <figcaption>HTML</figcaption>
-                            <img class="html" src="https://dl.dropboxusercontent.com/s/68gv23q4y5qyq52/html5.svg">
-                            <svg width="200" height="200">
-                                <circle class="outer" cx="98" cy="107" r="85" transform="rotate(-90, 95, 95)" />
-                            </svg>
-                        </figure>
-                    </div>
-                </div>
-
-            </div>
-
+    <div class="row">
+        <!-- *******************************        MENU FRONTAL    *************************************************************-->
+        <div class="col-lg-3 col-md-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link active" href="#"> <i class="fa fa-home fa-fw"></i> Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"> <i class="fa fa-list-alt fa-fw"></i> Widgets</a></li>
+            </ul>
         </div>
-    </section>
+        <!-- Menu desplegable de las GraficaS-->
+        <div class="col-lg-9 col-md-9">
+            <div class="grafica">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dotMenu" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
+                <!-- HTML Chart -->
+                <div class="containerC">
+                    <figure class="chart" data-percent="75">
+                        <figcaption>HTML</figcaption>
+                        <img class="html" src="https://dl.dropboxusercontent.com/s/68gv23q4y5qyq52/html5.svg">
+                        <svg width="200" height="200">
+                            <circle class="outer" cx="98" cy="107" r="85" transform="rotate(-90, 95, 95)" />
+                        </svg>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 {% endblock %}
