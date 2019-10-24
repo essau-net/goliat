@@ -22,39 +22,41 @@ def register():
     if request.method == 'GET':
         return render_template("register.html")
     else:
-        nombres = request.form['nombresE']
-        apellidos = request.form['apellidosE']
-        fechaNacimiento = request.form['fechaNacimientoE']
-        puestoEmpleado = request.form['puestoE']
-        tituloUniversitario = request.form['tituloE']
-        pais = request.form['paisE']
-        estado = request.form['estadoE']
-        ciudad = request.form['ciudadE']
-        usuario = request.form['usuarioE']
-        email = request.form['email']
+        nombres = request.form['nombresUsua']
+        apellidos = request.form['apellidosUsua']
+        fechaNacimiento = request.form['fechaNaciUsua']
+        numeroCel = request.form['numeroCelUsua']
+        puestosmpleado = request.form['trabajoUsua']
+        tituloUniversitario = request.form['gradoUniUsua']
+        pais = request.form['paisOrigenUsua']
+        estado = request.form['estadoOrigenUsua']
+        ciudad = request.form['ciudadOrigenUsua']
+        usuario = request.form['usuario']
+        email = request.form['emailUsua']
         clave = request.form['contraUsuario'].encode('utf-8')
         claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
         empleados = mysql.connection.cursor()
-        empleados.execute("INSERT INTO empleado (nombresE, apellidosE, fechaNacimientoE,  puestoE, tituloE, paisE, estadoE, ciudadE,  usuarioE, email, contraUsuario) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                          (nombres.upper(), apellidos.upper(), fechaNacimiento, puestoEmpleado, tituloUniversitario, pais, estado, ciudad, usuario, email, claveCifrada,))
+        empleados.execute("INSERT INTO empleado (nombresUsua, apellidosUsua, fechaNaciUsua, numeroCelUsua, trabajoUsua, gradoUniUsua, paisOrigenUsua, estadoOrigenUsua, ciudadOrigenUsua,  usuario, emailUsua, contraUsuario) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                          (nombres.upper(), apellidos.upper(), fechaNacimiento, numeroCel, puestosmpleado, tituloUniversitario, pais, estado, ciudad, email, usuario,  claveCifrada,))
         mysql.connection.commit()
+        empleados.close()
         return redirect(url_for('login'))
 
 
 @goliatApp.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == 'POST':
-        usuario = request.form['usuarioE']
+        usuario = request.form['usuario']
         clave = request.form['contraUsuario'].encode('utf-8')
         selUsuario = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         selUsuario.execute(
-            "SELECT * FROM empleado WHERE usuarioE = %s", (usuario,))
+            "SELECT * FROM empleado WHERE usuario = %s", (usuario,))
         u = selUsuario.fetchone()
         selUsuario.close()
         if u is not None:
             if bcrypt.hashpw(clave, u["contraUsuario"].encode('utf-8')) == u["contraUsuario"].encode('utf-8'):
-                session["nombresE"] = u["nombresE"] 
-                session["appellidosE"] = u["apellidosE"]
+                session["nombresUsua"] = u["nombresUsua"]
+                session["appellidosE"] = u["apellidosUsua"]
                 return render_template('home.html')
             else:
                 return 'Error: clave incorrecta'
@@ -62,6 +64,49 @@ def login():
             return 'Error: usuario no existe'
     else:
         return render_template("login.html")
+
+
+@goliatApp.route('/logout')
+def logout():
+    session.clear()
+    return render_template('login.html')
+
+
+@goliatApp.route('/home')
+def home():
+    return render_template('home.html')
+
+# - - - - -  - - - - - - - - - - - - - - - - Empleados- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+@goliatApp.route('/sPerfil', methods=["GET", "POST"])
+def sPerfil():
+    selEmpleado = mysql.connection.cursor()
+    selEmpleado.execute("SELECT * FROM jugadores")
+    empleado = selEmpleado.fetchall()
+    selEmpleado.close()
+    return render_template('perfil.html', perfil=empleado)
+
+
+@goliatApp.route('/iPerfil', methods=["POST"])
+def iPerfil():
+    nombres = request.form['nombresUsua']
+    apellidos = request.form['apellidosUsua']
+    fechaNacimiento = request.form['fechaNaciUsua']
+    puestosmpleado = request.form['trabajoUsua']
+    tituloUniversitario = request.form['gradoUniUsua']
+    pais = request.form['paisOrigenUsua']
+    estado = request.form['estadoOrigenUsua']
+    ciudad = request.form['ciudadOrigenUsua']
+    usuario = request.form['usuario']
+    email = request.form['emailUsua']
+    clave = request.form['contraUsuario'].encode('utf-8')
+    claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
+    empleado = mysql.connection.cursor()
+    empleado.execute("INSERT INTO empleado (nombresUsua, apellidosUsua, fechaNaciUsua,  trabajoUsua, gradoUniUsua, paisOrigenUsua, estadoOrigenUsua, ciudadOrigenUsua,  usuario, emailUsua, contraUsuario) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                     (nombres.upper(), apellidos.upper(), fechaNacimiento, puestosmpleado, tituloUniversitario, pais, estado, ciudad, usuario, email, claveCifrada,))
+    mysql.connection.commit()
+    empleado.close()
+    return redirect(url_for('sPerfil'))
+
 
 
 if __name__ == '__main__':
