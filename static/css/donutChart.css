@@ -1,60 +1,43 @@
-@mixin circle($size) {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  left: calc(50% - #{$size/2});
-  top: calc(50% - #{$size/2});
-  width: $size;
-  height: $size;
+@keyframes donut-chart-fill {
+  to { stroke-dasharray: 0 100; }
+}
+/* Grafica*/
+.svg-item {
+  width: 200px;
+  height: 200px;
+  font-size: 16px;
+}
+.donut-ring {
+  stroke: #EBEBEB;
 }
 
-$size: 200px;
-.progress-pie-chart {
-  width: $size;
-  height: $size;
-  border-radius: 50%;
-  background-color: #E5E5E5;
-  position: relative;
-  &.gt-50 {
-    background-color: #81CE97;
-  }
-}
-.ppc-progress {
-  @include circle($size);
-  clip: rect(0, $size, $size, #{$size/2});
-  .ppc-progress-fill {
-    @include circle($size);
-    clip: rect(0, #{$size/2}, $size, 0);
-    background: #81CE97;
-    transform: rotate(60deg);
-  }
-  .gt-50 & {
-    clip: rect(0, #{$size/2}, $size, 0);
-    .ppc-progress-fill {
-      clip: rect(0, $size, $size, #{$size/2});
-      background: #E5E5E5;
-    }
-  }
-}
-.ppc-percents {
-  @include circle(#{$size/1.15});
-  background: #fff;
-  text-align: center;
-  display: table;
-  span {
-    display: block;
-    font-size: 2.6em;
-    font-weight: bold;
-    color: #81CE97;
-  }
-}
-.pcc-percents-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+.donut-segment {
+  animation: donut-chart-fill 1s reverse ease-in;
+  transform-origin: center;
+  stroke: #FF6200;
 }
 
+.donut-text {
+  font-family: Arial, Helvetica, sans-serif;
+  fill: #FF6200;
+}
 
+.donut-label {
+  font-size: 0.28em;
+  font-weight: 700;
+  line-height: 1;
+  fill: #000;
+  transform: translateY(0.25em);    
+}
 
+.donut-percent {
+  font-size: 0.5em;
+  fill: #FF6200;
+  line-height: 1;
+  transform: translateY(0.5em);
+}
+
+/* Personalizar pagina web*/
 body {
   font-family: Arial;
   background: #f7f7f7;

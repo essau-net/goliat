@@ -76,6 +76,14 @@ def logout():
 def home():
     return render_template('home.html')
 
+@goliatApp.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+@goliatApp.route('/actividades')
+def actividades():
+    return render_template('actividades.html')
+
 # - - - - -  - - - - - - - - - - - - - - - - Empleados- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 @goliatApp.route('/sPerfil', methods=["GET", "POST"])
 def sPerfil():
@@ -108,6 +116,35 @@ def iPerfil():
     return redirect(url_for('sPerfil'))
 
 
+@goliatApp.route('/uPerfil', methods=["POST"])
+def uPerfil():
+    idUsuario = request.form['idUsuario']
+    nombres = request.form['nombresUsua']
+    apellidos = request.form['apellidosUsua']
+    fechaNacimiento = request.form['fechaNaciUsua']
+    trabajo = request.form['trabajoUsua']
+    tituloUniversitario = request.form['gradoUniUsua']
+    pais = request.form['paisOrigenUsua']
+    estado = request.form['estadoOrigenUsua']
+    ciudad = request.form['ciudadOrigenUsua']
+    usuario = request.form['usuario']
+    email = request.form['emailUsua']
+    clave = request.form['contraUsua'].encode('utf-8')
+    claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
+    empleado = mysql.connection.cursor()
+    empleado.execute("UPDATE usuario SET (nombresUsua = %s, apellidosUsua = %s, fechaNaciUsua = %s,  trabajoUsua = %s, gradoUniUsua = %s, paisOrigenUsua = %s, estadoOrigenUsua = %s, ciudadOrigenUsua = %s,  usuario = %s, emailUsua = %s, contraUsua= %s) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                     (nombres.upper(), apellidos.upper(), fechaNacimiento, trabajo, tituloUniversitario, pais, estado, ciudad, usuario, email, claveCifrada,idUsuario))
+    mysql.connection.commit()
+    empleado.close()
+    return redirect(url_for('sPerfil'))
+    
+@goliatApp.route('/dCliente/<string:idUsuario>', methods = ['GET'])
+def dPerfil(idUsuario):
+    delUsuario = mysql.connection.cursor()
+    delUsuario.execute("DELETE FROM usuario WHERE idUsuario = %s", (idUsuario))
+    mysql.connection.commit()
+    delUsuario.close()
+    return redirect(url_for('sPerfil'))
 
 if __name__ == '__main__':
     goliatApp.secret_key = 'goliatGana'

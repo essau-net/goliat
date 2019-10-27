@@ -47,3 +47,8 @@ input.btn.btn-outline-light.btn-block{
     display: flex;
     margin-left: 20px;
 }
+.normal{
+    background-color: #1f1f1f;
+    opacity: .8;
+    color: #ffffff;
+}
