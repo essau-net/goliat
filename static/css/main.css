@@ -7,22 +7,18 @@ body{
     color: white;
     background-color: #333;
 }
-/*.menu-lateral{
-    min-height: 68vh;
-}
-.graficasPastel{
-    margin-top: 30px;
-    float: left;
-}*/
+
 #inicio{
     background: url(../img/investor.png);
     min-height: 70vh;
     background-size: cover;
     background-attachment: fixed; 
 }
+
 .inicio{
     padding-top: 100px;
 }
+
 .inicioImagen{
     padding-top: 100px;
 }
@@ -35,6 +31,7 @@ body{
     min-width: 100%;
     min-height: 70vh;
 }
+
 .navbar{
     border-bottom: #5dbaf0ea 3px solid;
     opacity: .8;
@@ -54,19 +51,27 @@ input.btn.btn-outline-light.btn-block{
     display: flex;
     margin-left: 20px;
 }
-.normal{
-    background-color: #1f1f1f;
-    opacity: .8;
-    color: #ffffff;
+/* ########## Estilo pagina Actividades ##################*/
+.menu-lateral{
+    min-height: 68vh;
+    padding-left: 0px;
 }
+.graficasPastel{
+    
+    display: flex;
+    margin-top: 30px;
+    float: left;
+}
+
 .dotMenu{
-    border-color: white;
-    background-color: white;
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
     color: #d9d9d9;
     float: right;
     font-size: 25px;
     padding: 0px;   
     position: static;
+    height: 40px;
 }
 .dotMenu:hover{
     background-color: #565656;
@@ -77,17 +82,52 @@ input.btn.btn-outline-light.btn-block{
 
 }
 .contenedorMover{
-    float: right;
-    clear: left;
-    margin-top: 130px;
+    float: left;
+    background-color: #f7f7f7;
+    margin-top: 150px;
     margin-left: 180px;
-    
     position: absolute;
 }
 .mover{
     padding: 5px;
 }
+.mover:hover{
+    background-color: #565656;
+}
 .iconoMover{
     
     color: #d9d9d9;
+}
+/* Estilo de la pagina Perfil*/
+.perfil{
+    margin-right: 100px;
+}
+
+#imagenPerfil{
+    background: url(../img/usuario.jpg);
+    float: left;    
+    width: 230px;
+    height: 180px;
+    
+    /*border-radius: 71%;*/
+}
+
+.areaInformacion{
+    margin-left: 0px;
+}
+/* Uso general en en las paginas de los usuarios*/
+.normal{
+    background-color: #1f1f1f;
+    opacity: .8;
+    color: #ffffff;
+}
+.menu-lateral{
+    min-height: 68vh;
+    padding-left: 100px;
+}
+.paginasUsuario{
+    padding-top: 100px;
+    margin-left: 0px;
+    padding-left: 0px;
+    color: #1f1f1f;
 }
