@@ -1,37 +1,60 @@
 {% extends 'layout.html' %}
 {% block title %} Usuario-Registro {% endblock %}
 {% block content %}
-<form method="POST">
+<form method="POST" class="needs-validation" novalidate>
     <div class="form-row inicio">
         <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail" name="emailUsua" placeholder="Email">
+            <label for="emailUsua">Email</label>
+            <input type="email" class="form-control" id="emailUsua" name="emailUsua" placeholder="Email" required>
+            <div class="invalid-feedback">
+                Por favor introduzca un email
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="usuario">Usuario:</label>
-            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="hesau2001">
+            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="hesau2001"
+                aria-describedby="inputGroupPrepend" required>
+            <div class="invalid-feedback">
+                Por favor introduzca un Usuario
+            </div>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputContrasenia">Contraseña:</label>
-            <input type="password" class="form-control" id="inputContrasenia" name="contraUsua" placeholder="Password">
+            <input type="password" class="form-control" id="inputContrasenia" name="contraUsua" placeholder="Password"
+                required>
+            <div class="invalid-feedback">
+                Por favor introduzca una contraseña
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="inputPassword">Confirma tu contraseña:</label>
-            <input type="password" class="form-control" id="inputPasswordC" name="contraUsua1" placeholder="Password">
+            <input type="password" class="form-control" id="inputPasswordC" name="contraUsua1" placeholder="Password"
+                required>
+            <div class="invalid-feedback">
+                Por favor llene este campo
+            </div>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputNombre">Nombre(s):</label>
-            <input type="text" name="nombresUsua" class="form-control" id="inputNombre" placeholder="Hector Esau">
+            <input type="text" name="nombresUsua" class="form-control" id="inputNombre" placeholder="Hector Esau"
+                required>
+            <div class="invalid-feedback">
+                Introduce tus nombres
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="inputApellido">Apellido (s):</label>
-            <input type="text" name="apellidosUsua" class="form-control" id="inputApellido" placeholder="Macias Javier">
+            <input type="text" name="apellidosUsua" class="form-control" id="inputApellido" placeholder="Macias Javier"
+                required>
+            <div class="invalid-feedback">
+                Introduce tus apellidos
+            </div>
         </div>
     </div>
 
@@ -46,7 +69,12 @@
         </div>
         <div class="form-group col-md-3">
             <label for="inputNacimiento">Fecha de nacimiento:</label>
-            <input type="date" name="fechaNaciUsua" class="form-control" id="inputNacimiento" placeholder="Fecha">
+            <input type="date" name="fechaNaciUsua" class="form-control" id="inputNacimiento" placeholder="Fecha"
+                required>
+            <div class="invalid-feedback">
+                Introduce tu Fecha de nacimiento
+
+            </div>
         </div>
     </div>
     <div class="form-row">
@@ -70,3 +98,25 @@
     <button type="submit" class="btn btn-primary">Regstrarse</button>
 </form>
 {% endblock%}
+{% block script %}
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}

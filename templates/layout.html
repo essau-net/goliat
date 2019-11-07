@@ -27,8 +27,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul id="inicioRegistro" class="navbar-nav ml-auto">
-                {% if session['Nombre'] %}
-
+                {% if session["nombresUsua"] %}
+                <li class="nav-item ">
+                    <a class="nav-link navbar-brand">¡Bienvenido {{ session["nombresUsua"] }}!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Cerrar sesion</a>
+                </li>
                 {% else %}
                 <li class="nav-item active">
                     <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
@@ -46,13 +51,51 @@
     <!--    INICIO   -->
     {% block content %} {% endblock %}
 
-    <footer class="inicio container">
+    <footer id="contacto" class="inicio container inicio-arriba">
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>© 2017-2018 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
     </footer>
     <script src="{{ url_for ('static', filename = 'js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ url_for ('static', filename = 'js/popper.min.js') }}"></script>
     <script src="{{ url_for ('static', filename = 'js/bootstrap.min.js') }}"></script>
+
+    <script>
+        window.sr = ScrollReveal();
+
+        sr.reveal('.navbar', {
+            duration: 2000,
+            distance: '300px',
+            origin: 'bottom'
+        });
+
+        sr.reveal('.inicio-izq', {
+            duration: 3000,
+            distance: '300px',
+            origin: 'left'
+        });
+
+        sr.reveal('.inicio-derecha', {
+            duration: 3000,
+            distance: '300px',
+            origin: 'right'
+        });
+
+        sr.reveal('.inicio-arriba', {
+            duration: 3000,
+            distance: '300px',
+            origin: 'top'
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

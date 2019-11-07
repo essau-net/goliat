@@ -3,10 +3,12 @@
 {% block link %}
 <link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
 {% endblock %}
-
+{% block script%}
+<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+{% endblock %}
 {% block content %}
 
-<section id="paginaHome" class="container paginasUsuario">
+<section id="paginaPerfil" class="container paginasUsuario">
   <div class="row">
     <!-- *******************************        MENU FRONTAL    *************************************************************-->
     <div class="col-lg-3 col-md-3 menu-lateral">
@@ -20,88 +22,104 @@
               class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
       </ul>
     </div>
+    <div class="container col-lg-9 col-md-9">
 
-    <div class="col-lg-9 col-md-9 areaInformacion">
-      <div class="row">
-
-      <div class="col-lg-6 col-md-6 perfil">
-        <h1>Perfil</h1>
-      </div>
-
-      
-      <div id="imagenPerfilDiv" class="col-lg-3 col-md-3">
-        <img id="imagenPerfil" class="imagenPerfil">
-      </div>
-      <form method="POST">
-          <div class="form-row inicio">
-              <div class="form-group col-md-6">
-                  <label for="inputEmail4">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" name="emailUsua" placeholder="Email">
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="usuario">Usuario:</label>
-                  <input type="text" class="form-control" id="usuario" name="usuario" placeholder="hesau2001">
-              </div>
-          </div>
-      
-          <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label for="inputContrasenia">Contraseña:</label>
-                  <input type="password" class="form-control" id="inputContrasenia" name="contraUsua" placeholder="Password">
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="inputPassword">Confirma tu contraseña:</label>
-                  <input type="password" class="form-control" id="inputPasswordC" name="contraUsua1" placeholder="Password">
-              </div>
-          </div>
-      
-          <div class="form-row">
-              <div class="form-group col-md-6">
+      <div class="col-lg-9 col-md-9 areaInformacion">
+        <form action="/uPerfil" method="POST">
+          <input type="hidden" name="idUsuario" id="idUsuario1" value="{{perfil.idUsuario}}">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 perfil">
+              <h1>Perfil</h1>
+              <div class="form-row">
+                <div class="form-group col-md-12">
                   <label for="inputNombre">Nombre(s):</label>
-                  <input type="text" name="nombresUsua" class="form-control" id="inputNombre" placeholder="Hector Esau">
-              </div>
-              <div class="form-group col-md-6">
+                  <input type="text" name="nombresUsua" class="form-control" id="inputNombre"
+                    value="{{ perfil.nombresUsua}}">
+                </div>
+                <div class="form-group col-md-12">
                   <label for="inputApellido">Apellido (s):</label>
-                  <input type="text" name="apellidosUsua" class="form-control" id="inputApellido" placeholder="Macias Javier">
+                  <input type="text" name="apellidosUsua" class="form-control" id="inputApellido"
+                    value="{{perfil.apellidosUsua}}">
+                </div>
               </div>
-          </div>
-      
-          <div class="form-row">
+            </div>
+
+            <div id="imagenPerfilDiv" class="col-lg-3 col-md-3">
+              <img id="imagenPerfil" class="imagenPerfil">
+            </div>
+            <div class="form-row">
               <div class="form-group col-md-6">
-                  <label for="inputTrabajo">Trabajo:</label>
-                  <input type="text" name="trabajoUsua" class="form-control" id="inputTrabajo" placeholder="Contador">
+                <label for="usuario">Usuario:</label>
+                <input type="text" class="form-control" id="usuario" name="usuario" value="{{perfil.usuario}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail" name="emailUsua" value="{{perfil.emailUsua}}">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputContrasenia">Contraseña:</label>
+                <input type="password" class="form-control" id="inputContrasenia" name="contraUsua"
+                  placeholder="Password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword">Confirma tu contraseña:</label>
+                <input type="password" class="form-control" id="inputPasswordC" name="contraUsua1"
+                  placeholder="Password">
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="inputTrabajo">Trabajo:</label>
+                <input type="text" name="trabajoUsua" class="form-control" id="inputTrabajo"
+                  placeholder="{{perfil.trabajoUsua}}">
               </div>
               <div class="form-group col-md-3">
-                  <label for="inputCelular">Numero celular:</label>
-                  <input type="text" name="numeroCelUsua" class="form-control" id="inputCelular" placeholder="3310284364">
+                <label for="inputCelular">Numero celular:</label>
+                <input type="text" name="numeroCelUsua" class="form-control" id="inputCelular"
+                  value="{{perfil.numeroCelUsua}}">
               </div>
-              <div class="form-group col-md-3">
-                  <label for="inputNacimiento">Fecha de nacimiento:</label>
-                  <input type="date" name="fechaNaciUsua" class="form-control" id="inputNacimiento" placeholder="Fecha">
-              </div>
-          </div>
-          <div class="form-row">
               <div class="form-group col-md-4">
-                  <label for="inputTitulo">Titulo:</label>
-                  <input type="text" name="gradoUniUsua" class="form-control" id="inputTitulo" placeholder="">
+                <label for="inputNacimiento">Fecha de nacimiento:</label>
+                <input type="date" name="fechaNaciUsua" class="form-control" id="inputNacimiento"
+                  value="{{perfil.fechaNaciUsua}}">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="inputTitulo">Titulo:</label>
+                <input type="text" name="gradoUniUsua" class="form-control" id="inputTitulo"
+                  value="{{perfil.gradoUniUsua}}">
               </div>
               <div class="form-group col-md-3">
-                  <label for="inputCiudad">Ciudad</label>
-                  <input type="text" name="ciudadOrigenUsua" class="form-control" id="inputCiudad">
+                <label for="inputCiudad">Ciudad</label>
+                <input type="text" name="ciudadOrigenUsua" class="form-control" id="inputCiudad"
+                  value="{{perfil.ciudadOrigenUsua}}">
               </div>
               <div class="form-group col-md-3">
-                  <label for="inputEstado">Estado</label>
-                  <input type="text" name="estadoOrigenUsua" class="form-control" id="inputEstado">
+                <label for="inputEstado">Estado</label>
+                <input type="text" name="estadoOrigenUsua" class="form-control" id="inputEstado"
+                  value="{{perfil.estadoOrigenUsua}}">
               </div>
               <div class="form-group col-md-2">
-                  <label for="inputPais">Pais</label>
-                  <input type="text" name="paisOrigenUsua" class="form-control" id="inputPais">
+                <label for="inputPais">Pais</label>
+                <input type="text" name="paisOrigenUsua" class="form-control" id="inputPais"
+                  value="{{perfil.paisOrigenUsua}}">
               </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
-      </form>
-      
-    </div>
+
+          <button type="submit" class="btn btn-primary eliminar eliminarEditar">Guardar cambios</button> 
+          
+        </form>
+
+        <div class="eliminarEditar">
+          <form action="/dPerfil" method="POST">
+            <button type="submit" class="btn btn-primary">Eliminar Cuenta</button>
+          </form>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
 </section>

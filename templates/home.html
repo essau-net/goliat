@@ -3,10 +3,12 @@
 {% block link %}
 <link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
 {% endblock %}
-
+{% block script%}
+<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+{% endblock %}
 {% block content %}
 
-<section id="paginaHome" class="container inicio">
+<section id="paginaHome" class="container paginasUsuario">
   <div class="row">
     <!-- *******************************        MENU FRONTAL    *************************************************************-->
     <div class="col-lg-3 col-md-3 menu-lateral">
@@ -14,7 +16,7 @@
         <li class="nav-item"><a id="homeM" class="nav-link active" href="/home"> <i class="fa fa-home fa-fw"></i>
             Home</a>
         </li>
-        <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/perfil"> <i class="fas fa-user"></i>
+        <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i class="fas fa-user"></i>
             Perfil</a></li>
         <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/actividades"> <i
               class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
@@ -22,113 +24,29 @@
     </div>
 
 
-    <!-- Menu desplegable de las GraficaS-->
-    <div class="contenedorGraficas col-lg-9 col-md-9mn">
-      <!-- Priemera GRAFICA DE PASTELES para actividades-->
-      <div class="containerG">
-        <section id="primerGrafica" class="graficasPastel">
-          <div class="grafica">
-            <div class="svg-item">
-
-              <svg width="100%" height="100%" viewBox="0 0 40 40" class="donut">
-                <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
-                <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5">
-                </circle>
-                <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent"
-                  stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="25"></circle>
-                <g class="donut-text">
-
-                  <text y="50%" transform="translate(0, 2)">
-                    <tspan x="50%" text-anchor="middle" class="donut-percent">40%</tspan>
-                  </text>
-                </g>
-              </svg>
-
+    <!-- **********************************       Proyectos       *************************************************************-->
+    <div class="col-lg-9 col-md-9">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-
-
-          <div class="btn-group">
-
-            <button type="button" class="btn btn-danger dotMenu" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              &#10247;
-            </button>
-
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Agregar</a>
-              <a class="dropdown-item" href="#">Modificar</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Eliminar</a>
-            </div>
-
-          </div>
-
-
-          <div class="contenedorMover">
-
-            <div id="mover1" class="mover">
-              <i class="fas fa-compress-arrows-alt iconoMover"></i>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-
-        </section>
+        </div>
       </div>
-
-      <div class="containerG">
-        <section id="primerGrafica" class="graficasPastel">
-          <div class="grafica">
-            <div class="svg-item">
-
-              <svg width="100%" height="100%" viewBox="0 0 40 40" class="donut">
-                <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
-                <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5">
-                </circle>
-                <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent"
-                  stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="25"></circle>
-                <g class="donut-text">
-
-                  <text y="50%" transform="translate(0, 2)">
-                    <tspan x="50%" text-anchor="middle" class="donut-percent">40%</tspan>
-                  </text>
-                </g>
-              </svg>
-
-            </div>
-          </div>
-
-
-          <div class="btn-group">
-
-            <button type="button" class="btn btn-danger dotMenu" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              &#10247;
-            </button>
-
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Agregar</a>
-              <a class="dropdown-item" href="#">Editar</a>
-              <a class="dropdown-item" href="#"></a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Eliminar</a>
-            </div>
-
-          </div>
-
-
-          <div class="contenedorMover">
-
-            <div id="mover1" class="mover">
-              <i class="fas fa-compress-arrows-alt iconoMover"></i>
-            </div>
-          </div>
-
-        </section>
-      </div>
-      
-
     </div>
-
   </div>
 </section>
 {% endblock %}

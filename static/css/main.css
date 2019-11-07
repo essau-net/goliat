@@ -36,7 +36,7 @@ body{
     border-bottom: #5dbaf0ea 3px solid;
     opacity: .8;
 }
-.navbar-toggler-icon{
+.navbar{
     color: #5dbaf0ea;
 
 }
@@ -105,15 +105,20 @@ input.btn.btn-outline-light.btn-block{
 
 #imagenPerfil{
     background: url(../img/usuario.jpg);
-    float: left;    
+    float: right;    
     width: 230px;
     height: 180px;
+    margin-bottom: 20px;
     
     /*border-radius: 71%;*/
 }
 
 .areaInformacion{
     margin-left: 0px;
+}
+.eliminarEditar{
+    margin-left: 10px;
+    float: right;
 }
 /* Uso general en en las paginas de los usuarios*/
 .normal{
@@ -123,7 +128,7 @@ input.btn.btn-outline-light.btn-block{
 }
 .menu-lateral{
     min-height: 68vh;
-    padding-left: 100px;
+    padding-left: 50px;
 }
 .paginasUsuario{
     padding-top: 100px;
