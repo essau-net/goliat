@@ -42,6 +42,17 @@
                                             <h3>Lorem ipsum dolor sit.</h3>
                                             <p> Lorem ipsum dolor sit.</p>
                                             <form action="/login" method="POST">
+                                            
+                                                {% with messages = get_flashed_messages() %}
+                                                {% if messages %}
+                                                {% for msg in messages %}
+
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{msg}} <a href="#" class="alert-link"></a>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                                {% endwith %}
                                                 <div  class="form-group">
                                                     <input type="text" name="usuario" placeholder="Usuario"
                                                         class="form-group form-control-lg" />

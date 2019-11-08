@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL, MySQLdb
 from flask_bcrypt import bcrypt
 from PIL import Image
-import base64
+import time, datetime, base64
+
 
 
 goliatApp = Flask(__name__)
@@ -73,9 +74,11 @@ def login():
                 saveIdUsuario(u["idUsuario"])
                 return render_template('home.html')
             else:
-                return 'Error: clave incorrecta'
+                flash('Error: clave incorrecta')
+                return redirect(request.url)
         else:
-            return 'Error: usuario no existe'
+            flash('Error: usuario no existe')
+            return redirect(request.url)
     else:
         return render_template("login.html")
 
@@ -117,7 +120,7 @@ def actividades():
     return render_template('actividades.html')
 
 # - - - - -  - - - - - - - - - - - - - - - - Perfil- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-#------------------------------------------- Selecion del Perfil ------------------------------------------------#
+#-------------------------------------------        Selecion del Perfil          ------------------------------------------------#
 @goliatApp.route('/sPerfil', methods=["POST", "GET"])
 def sPerfil():
     selUsuario = mysql.connection.cursor()
@@ -127,29 +130,7 @@ def sPerfil():
     selUsuario.close()
     return render_template('perfil.html', perfil=usuario)
 
-
-@goliatApp.route('/iPerfil', methods=["POST"])
-def iPerfil():
-    nombres = request.form['nombresUsua']
-    apellidos = request.form['apellidosUsua']
-    fechaNacimiento = request.form['fechaNaciUsua']
-    trabajo = request.form['trabajoUsua']
-    tituloUniversitario = request.form['gradoUniUsua']
-    pais = request.form['paisOrigenUsua']
-    estado = request.form['estadoOrigenUsua']
-    ciudad = request.form['ciudadOrigenUsua']
-    usuario = request.form['usuario']
-    email = request.form['emailUsua']
-    clave = request.form['contraUsua'].encode('utf-8')
-    claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
-    empleado = mysql.connection.cursor()
-    empleado.execute("INSERT INTO usuario (nombresUsua, apellidosUsua, fechaNaciUsua,  trabajoUsua, gradoUniUsua, paisOrigenUsua, estadoOrigenUsua, ciudadOrigenUsua,  usuario, emailUsua, contraUsua) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                     (nombres.upper(), apellidos.upper(), fechaNacimiento, trabajo, tituloUniversitario, pais, estado, ciudad, usuario, email, claveCifrada,))
-    mysql.connection.commit()
-    empleado.close()
-    return redirect(url_for('sPerfil'))
-
-
+#------------------------------------------         Actualizacion de Perfil          ----------------------------------------------#
 @goliatApp.route('/uPerfil', methods=["POST"])
 def uPerfil():
     idUsuario = request.form['idUsuario']
@@ -173,7 +154,7 @@ def uPerfil():
     empleado.close()
     return redirect(url_for('sPerfil'))
 
-
+#----------------------------------------------------        Eliminar cuenta        ------------------------------#
 @goliatApp.route('/dPerfil', methods=['POST'])
 def dPerfil():
     delUsuario = mysql.connection.cursor()
@@ -182,6 +163,43 @@ def dPerfil():
     delUsuario.close()
     return redirect(url_for('logout'))
 
+#*************************************************    Actividades       *****************************************#
+#------------------------------------------------       Selecionar actividades          ------------------------#
+@goliatApp.route('/sActividad', methods=["POST", "GET"])
+def sActividad():
+    selAct = mysql.connection.cursor() 
+    selAct.execute(
+        "SELECT * FROM actividad")
+    actividad = selAct.fetchall()
+    selAct.close()
+    return render_template('actividades.html', act=actividad)
+
+#------------------------------------------------       Crear nueva Actividad           --------------------------#
+@goliatApp.route('/iActividad', methods=["POST"])
+def iActividad():
+    titulo = request.form['tituloAct']
+    proposito = request.form['propositoAct']
+    finalizada = request.form['actFinalizada']
+    fechaPrevistaFin = request.form['fechaPrevistaFin']
+    propietario = idUsuarioG
+    if finalizada == 'y':
+        progresoAct = '100'
+    elif finalizada == 'n':
+        progresoAct = '0'
+    inicioAct = datetime.datetime.now()
+    
+    pais = request.form['paisOrigenUsua']
+    estado = request.form['estadoOrigenUsua']
+    ciudad = request.form['ciudadOrigenUsua']
+    usuario = request.form['usuario']
+    email = request.form['emailUsua']
+    clave = request.form['contraUsua'].encode('utf-8')
+    claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
+    empleado = mysql.connection.cursor()
+    
+    mysql.connection.commit()
+    empleado.close()
+    return redirect(url_for('sPerfil'))
 
 if __name__ == '__main__':
     goliatApp.secret_key = 'goliatGana'

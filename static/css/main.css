@@ -120,6 +120,32 @@ input.btn.btn-outline-light.btn-block{
     margin-left: 10px;
     float: right;
 }
+/* Pagina Actividades*/
+.addActividad{
+    width: auto;
+    float: right;
+    color: #f7f7f7;
+    padding: 4px;
+    font-size: 19px;
+}
+
+.espacio{
+    float: left;
+    padding: 4px 15px 4px 3px;
+}
+
+.espacio1{
+    float: right;
+    padding: 4px 8px 4px 3px;
+}
+
+.modalActividad{
+    color: black;
+}
+
+.radio{
+    padding: 10px 30px;
+}
 /* Uso general en en las paginas de los usuarios*/
 .normal{
     background-color: #1f1f1f;
@@ -135,4 +161,8 @@ input.btn.btn-outline-light.btn-block{
     margin-left: 0px;
     padding-left: 0px;
     color: #1f1f1f;
+}
+
+.limpiar{
+    clear: both;
 }

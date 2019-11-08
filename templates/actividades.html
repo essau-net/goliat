@@ -9,6 +9,15 @@
 {% block content %}
 
 <section id="paginaActividades" class="container paginasUsuario">
+  <div class="addActividad">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad">
+      <div class="espacio"> <i class="fas fa-plus"> </i> </div>
+      <div class="espacio1"> <i class="fas fa-sort-down"></i> </div>
+    </button>
+  </div>
+
+  <div class="limpiar"></div>
+
   <div class="row">
     <!-- *******************************        MENU FRONTAL    *************************************************************-->
     <div class="col-lg-3 col-md-3 menu-lateral">
@@ -80,6 +89,51 @@
 
     </div>
 
+  </div>
+
+  <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="agregarActividad" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="agregarActividad">Crear actividad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Titulo actividad</label>
+              <input type="text" class="form-control" id="tituloAct" name="tituloAct">
+            </div>
+
+            <div class="form-group">
+              <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
+              <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
+            </div>
+
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Proposito:</label>
+              <textarea class="form-control" id="propositoAct" name="propositoAct"></textarea>
+            </div>
+
+            <div class="radio custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="actFinalizada" name="actFinalizada" value="y">
+              <label class="custom-control-label" for="actFinaluzada" >Actividad finalizada</label>
+            </div>
+
+            <div class="radio custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label" for="defaultUnchecked" value="n">Actividad por realizar</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Crear</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}
