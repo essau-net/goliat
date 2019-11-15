@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2019 at 03:57 AM
+-- Generation Time: Nov 11, 2019 at 11:49 AM
 -- Server version: 5.7.27-log
 -- PHP Version: 7.3.8
 
@@ -30,15 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actividad` (
   `idAct` int(11) NOT NULL,
-  `tituloaAct` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `tituloAct` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `propositoAct` text COLLATE utf8_spanish_ci,
+  `propietarioAct` int(11) NOT NULL,
   `progresoAct` int(11) DEFAULT NULL,
   `actFinalizada` varchar(1) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fechaIniAct` date NOT NULL,
+  `fechaIniAct` datetime NOT NULL,
   `fechaFinAct` datetime DEFAULT NULL,
   `fechaPrevistaFin` datetime DEFAULT NULL,
   `iconA` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `actividad`
+--
+
+INSERT INTO `actividad` (`idAct`, `tituloAct`, `propositoAct`, `propietarioAct`, `progresoAct`, `actFinalizada`, `fechaIniAct`, `fechaFinAct`, `fechaPrevistaFin`, `iconA`) VALUES
+(4, 'Prueba', 'nbkjn', 6, 0, 'n', '2019-11-07 00:00:00', NULL, '2020-05-30 02:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -147,7 +155,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `nombresUsua`, `apellidosUsua`, `fechaNaciUsua`, `numeroCelUsua`, `trabajoUsua`, `gradoUniUsua`, `paisOrigenUsua`, `estadoOrigenUsua`, `ciudadOrigenUsua`, `tipoUsua`, `usuario`, `emailUsua`, `contraUsua`, `imagenUsua`) VALUES
 (4, 'DANIEL ALEJANDRO', 'MARIN MARIN', '2001-12-11', '3321224121', 'Director de cine', 'Licenciatura en Cinematografia ', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'Danixt', 'daniel@gmail.com', '$2b$12$O.B/Oy8RxtdHZMHhFp2W3ergIJ.o8nb0Q8ETGakYBefQSDIpiWWm6', NULL),
-(6, 'HECTOR ESAU', 'MACIAS ', '2001-07-28', '12345678', '', 'Ingeniero en Nanotenologia', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'hesau2001', 'hesau2001@gmail.com', '$2b$12$WwZJKyHL6lrkULCAYjfV0Oj/qKdAH8kvuSIs3Tpm.q.AdLROfwc4i', NULL);
+(6, 'HECTOR ESAU', 'MACIAS ', '2001-07-28', '12345678', '', 'Ingeniero en Nanotenologia', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'hesau2001', 'hesau2001@gmail.com', '$2b$12$Vt1oEoELDeay/99B.ryhiORwJwsDemQHHUuf2QONl13oXGTchczra', NULL);
 
 --
 -- Indexes for dumped tables
@@ -211,7 +219,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cronograma`

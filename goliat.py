@@ -2,8 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_mysqldb import MySQL, MySQLdb
 from flask_bcrypt import bcrypt
 from PIL import Image
-import time, datetime, base64
-
+import time
+import datetime
+import base64
 
 
 goliatApp = Flask(__name__)
@@ -20,7 +21,6 @@ idUsuarioG = ""
 def saveIdUsuario(idUsuarioLogin):
     global idUsuarioG
     idUsuarioG = str(idUsuarioLogin)
-    
 
 
 @goliatApp.route('/')
@@ -98,26 +98,21 @@ def home():
 def perfil():
     return render_template('uploadPerfil.html')
 
+
 @goliatApp.route('/uploadImagen', methods=["POST"])
 def uploadImagen():
-    imagenCamino = request.form["imagenUsuario"]
-    with open(r"C:\Server\me.jpg", 'rb') as imagen:
-        informacionBinaria = imagen.read()
     
+    imagen = request.form['imagenUsuario'].read()
+
     insertImagen = mysql.connection.cursor()
-    insertImagen.execute("INSERT INTO prueba (imagen) VALUES (%s)", (informacionBinaria,))
+    insertImagen.execute(
+        "INSERT INTO prueba (imagen) VALUES (%s)", (imagen,))
     mysql.connection.commit()
     insertImagen.execute("SELECT * FROM  prueba")
-    img =  insertImagen.fetchall()
+    img = insertImagen.fetchall()
     insertImagen.close
-    return render_template('uploadPerfil.html', imagenes = img)
+    return render_template('uploadPerfil.html', imagenes=img)
 
-
-
-
-@goliatApp.route('/actividades')
-def actividades():
-    return render_template('actividades.html')
 
 # - - - - -  - - - - - - - - - - - - - - - - Perfil- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 #-------------------------------------------        Selecion del Perfil          ------------------------------------------------#
@@ -158,7 +153,8 @@ def uPerfil():
 @goliatApp.route('/dPerfil', methods=['POST'])
 def dPerfil():
     delUsuario = mysql.connection.cursor()
-    delUsuario.execute("DELETE FROM usuario WHERE idUsuario = %s", (idUsuarioG,))
+    delUsuario.execute(
+        "DELETE FROM usuario WHERE idUsuario = %s", (idUsuarioG,))
     mysql.connection.commit()
     delUsuario.close()
     return redirect(url_for('logout'))
@@ -167,40 +163,90 @@ def dPerfil():
 #------------------------------------------------       Selecionar actividades          ------------------------#
 @goliatApp.route('/sActividad', methods=["POST", "GET"])
 def sActividad():
-    selAct = mysql.connection.cursor() 
+    selAct = mysql.connection.cursor()
     selAct.execute(
-        "SELECT * FROM actividad")
-    actividad = selAct.fetchall()
+        "SELECT * FROM actividad WHERE propietarioAct = %s", (idUsuarioG,))
+    act = selAct.fetchall()
     selAct.close()
-    return render_template('actividades.html', act=actividad)
+    return render_template('actividades.html', actividad=act)
 
 #------------------------------------------------       Crear nueva Actividad           --------------------------#
 @goliatApp.route('/iActividad', methods=["POST"])
 def iActividad():
     titulo = request.form['tituloAct']
     proposito = request.form['propositoAct']
-    finalizada = request.form['actFinalizada']
     fechaPrevistaFin = request.form['fechaPrevistaFin']
     propietario = idUsuarioG
-    if finalizada == 'y':
-        progresoAct = '100'
-    elif finalizada == 'n':
-        progresoAct = '0'
-    inicioAct = datetime.datetime.now()
-    
-    pais = request.form['paisOrigenUsua']
-    estado = request.form['estadoOrigenUsua']
-    ciudad = request.form['ciudadOrigenUsua']
-    usuario = request.form['usuario']
-    email = request.form['emailUsua']
-    clave = request.form['contraUsua'].encode('utf-8')
-    claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
-    empleado = mysql.connection.cursor()
-    
-    mysql.connection.commit()
-    empleado.close()
-    return redirect(url_for('sPerfil'))
+    fechaInicioAct = datetime.datetime.now()
+    actividad = mysql.connection.cursor()
+    valor = request.form.get('actFinalizada')
+    if valor:
+        finalizada = 'y'
+        progresoAct = 40
+        fechaFinAct = datetime.datetime.now()
+        actividad.execute(
+            "INSERT INTO actividad (tituloAct, propositoAct, propietarioAct, progresoAct, actFinalizada, fechaIniAct, fechaPrevistaFin, fechaFinAct) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (titulo, proposito, propietario, progresoAct, finalizada, fechaInicioAct, fechaPrevistaFin, fechaFinAct))
+    else:
+        finalizada = 'n'
+        progresoAct = 0
 
+        actividad.execute(
+            "INSERT INTO actividad (tituloAct, propositoAct, propietarioAct, progresoAct, actFinalizada, fechaIniAct, fechaPrevistaFin) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (titulo, proposito, propietario, progresoAct, finalizada, fechaInicioAct, fechaPrevistaFin))
+    mysql.connection.commit()
+    actividad.close()
+    return redirect(url_for('sActividad'))
+#------------------------------------------     Editar Actividad        ----------------------------------------------#
+@goliatApp.route('/uActividad', methods=["GET"])
+def uActividad():
+    idAct = request.form['idAct']
+    titulo = request.form['tituloAct']
+    proposito = request.form['propositoAct']
+    fechaPrevistaFin = request.form['fechaPrevistaFin']
+    propietario = idUsuarioG
+    fechaInicioAct = datetime.datetime.now()
+    actividad = mysql.connection.cursor()
+    valor = request.form.get('actFinalizada')
+    if valor:
+        finalizada = 'y'
+        progresoAct = 100
+        fechaFinAct = datetime.datetime.now()
+        actividad.execute(
+            "UPDATE actividad tituloAct =%s, propositoAct = %s, propietarioAct = %s, progresoAct %s, actFinalizada = %s, fechaIniAct = %s, fechaPrevistaFin = %s, fechaFinAct = %s WHERE idAct = %s",
+            (titulo, proposito, propietario, progresoAct, finalizada, fechaInicioAct, fechaPrevistaFin, fechaFinAct, idAct))
+    else:
+        finalizada = 'n'
+        progresoAct = 0
+
+        actividad.execute(
+            "UPDATE actividad tituloAct =%s, propositoAct = %s, propietarioAct = %s, progresoAct %s, actFinalizada = %s, fechaIniAct = %s, fechaPrevistaFin = %s WHERE idAct = %s",
+            (titulo, proposito, propietario, progresoAct, finalizada, fechaInicioAct, fechaPrevistaFin, idAct))
+    mysql.connection.commit()
+    actividad.close()
+    return redirect(url_for('sActividad'))
+
+#------------------------------------------     Eliminar Actividad      ----------------------------------------------#
+@goliatApp.route('/dActividad<string:idAct>', methods=['GET'])
+def dActividad(idAct):
+    delAct = mysql.connection.cursor()
+    delAct.execute(
+        "DELETE FROM actividad WHERE idAct = %s", (idAct,))
+    mysql.connection.commit()
+    delAct.close()
+    return redirect(url_for('sActividad'))
+
+#**************************************************************         SubActividad        *****************************************************#
+#--------------------------------------------------------------         SeleccionarActividades      --------------------------------------------#@goliatApp.route('/sActividad', methods=["POST", "GET"])
+"""
+def sActividad():
+    selSub = mysql.connection.cursor()
+    selSub.execute(
+        "SELECT * FROM subactividad")
+    act = selAct.fetchall()
+    selAct.close()
+    return render_template('actividades.html', actividad=act)
+"""
 if __name__ == '__main__':
     goliatApp.secret_key = 'goliatGana'
     goliatApp.run(port=3000, debug=True)

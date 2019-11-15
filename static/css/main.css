@@ -146,6 +146,16 @@ input.btn.btn-outline-light.btn-block{
 .radio{
     padding: 10px 30px;
 }
+.anchoCard{
+    width: 20rem;
+    float: left;
+    margin: 8px 15px;
+    min-height: 24rem;
+}
+.card-body a{
+    margin: 18px 0;
+    float: right;
+}
 /* Uso general en en las paginas de los usuarios*/
 .normal{
     background-color: #1f1f1f;
