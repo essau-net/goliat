@@ -156,6 +156,59 @@ input.btn.btn-outline-light.btn-block{
     margin: 18px 0;
     float: right;
 }
+
+/* Estilo en pagina sub.html       */
+
+#encabezadoTabla{
+    background-color: #3f3f3f;
+    color: white;
+}
+
+.col1{
+    width: 50px;
+    height: auto;
+    text-align: center;
+}
+
+.col2{
+    width: 270px;
+    word-wrap: break-word;
+}
+
+.col3{
+    width: 40px;
+    height: auto;
+    text-align: center;
+}
+
+.col4{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col5{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col6{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col7{
+    width: 280px;
+    height: auto;
+}
+
+.botonEditarEliminar{
+    width: 80px;
+    margin: 5px 0;
+}
+
 /* Uso general en en las paginas de los usuarios*/
 .normal{
     background-color: #1f1f1f;
@@ -175,4 +228,68 @@ input.btn.btn-outline-light.btn-block{
 
 .limpiar{
     clear: both;
+}
+/*      Check-Box        */
+.containerLabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    
+    
+    
+    
+    
+  }
+  
+  /* Hide the browser's default checkbox */
+  .containerLabel input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    
+    
+  }
+  
+  /* Create a custom checkbox */
+.seleccionado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+.seleccionado:hover {
+    background-color: #ccc;
+  }
+  
+.containerLabel input:checked ~ .seleccionado {
+    background-color: #2196F3;
+}
+  
+  
+.seleccionado:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+
+.containerLabel input:checked ~ .seleccionado:after {
+    display: block;
+}
+  
+.containerLabel .seleccionado:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

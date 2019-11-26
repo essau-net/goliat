@@ -14,7 +14,6 @@
 
     <script src="{{ url_for('static', filename = 'js/all.js') }}"></script>
     <script src="{{ url_for('static',filename ='js/scrollreveal.min.js') }}"></script>
-    {% block script%} {% endblock %}
 </head>
 
 <body>
@@ -96,6 +95,7 @@
             });
         });
     </script>
+    {% block script%} {% endblock %}
 </body>
 
 </html>

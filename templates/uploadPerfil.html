@@ -23,12 +23,18 @@
             </ul>
         </div>
 
-        <form action="/uploadImagen" method="POST"  enctype="multipart/form-data">
-            <label for="imagenUsuario">imagenUsuario </label>
-            <input id="imagenUsuario" type="file" name="imagenUsuario" 
-                    accept="image/*">
-            <input type="submit" value="Upload">
-        
+        <form action="/uploadImagen" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Select image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Select image...</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Upload</button>
+
         </form>
 
 

@@ -1,0 +1,326 @@
+{%extends 'layout.html' %}
+{% block title%} Goliat - home {% endblock%}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
+{% endblock %}
+{% block script%}
+<script src="{{ url_for('static', filename='js/sub.js')}}"></script>
+{% endblock %}
+{% block content %}
+
+<section id="paginaHome" class="container paginasUsuario">
+    <div class="row">
+        <!-- *******************************        MENU FRONTAL    *************************************************************-->
+        <div class="col-lg-3 col-md-3 menu-lateral">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/home"> <i
+                            class="fa fa-home fa-fw"></i>
+                        Home</a>
+                </li>
+                <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i
+                            class="fas fa-user"></i>
+                        Perfil</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i
+                            class="fas fa-users"></i> Grupos</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sActividad"> <i
+                            class="far fa-check-square"></i> Actividades</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link active" href="/sSub"><i
+                            class="fas fa-tasks"></i> Subactividades</a></li>
+            </ul>
+        </div>
+
+        <!-- **********************************       SubActividades       *************************************************************-->
+        <div class="col-lg-9 col-md-9">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr id="encabezadoTabla">
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Proposito</th>
+                            <th scope="col">Progreso</th>
+                            <th scope="col">Inicio</th>
+                            <th scope="col">Prevista para</th>
+                            <th scope="col">Finalizada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sub in subActs%}
+                        <tr>
+                            {% if sub.progresoSub == 100 %}
+
+                            <td class="table-success col1">
+                                <p class="col1">{{ sub.tituloSub }}</p>
+                            </td>
+                            <td class="table-success col2">
+                                <p class="col2">{{ sub.propositoSub }}</p>
+                            </td>
+                            <td class="table-success col3">
+                                <p class="col3">{{ sub.progresoSub }}</p>
+                            </td>
+                            <td class="table-success col4">
+                                <p class="col4">{{ sub.fechaIniSub }}</p>
+                            </td>
+                            <td class="table-success col5">
+                                <p class="col5">{{ sub.fechaPrevistaFinSub }}</p>
+                            </td>
+                            <td class="table-success col6">
+                                <p class="col6">{{ sub.fechaFinSub }}</p>
+                            </td>
+                            <td class="col7">
+                                <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
+                                    data-target="#ModificarSubActividad">Editar</button>
+                                
+                                    <form action="dSub" method="post">
+                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                        <input type="submit" class="btn btn-danger botonEditarEliminar" name="idSub" value="Eliminar">
+                                    </form>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            {% if 100 > sub.progresoSub and sub.progresoSub >= 50 %}
+
+                            <td class="table-info col1">
+                                <p>{{ sub.tituloSub }}</p>
+                            </td>
+                            <td class="table-info col2">
+                                <p class="col2">{{ sub.propositoSub }}</p>
+                            </td>
+                            <td class="table-info col3">
+                                <p>{{ sub.progresoSub }}</p>
+                            </td>
+                            <td class="table-info col4">
+                                <p>{{ sub.fechaIniSub }}</p>
+                            </td>
+                            <td class="table-info col5">
+                                <p>{{ sub.fechaPrevistaFinSub }}</p>
+                            </td>
+                            <td class="table-info col6">
+
+                            </td>
+                            <td class="col7">
+                                <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
+                                    data-target="#ModificarSubActividad">Editar</button>
+                                
+                                    <form action="dSub" method="post">
+                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                        <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
+                                    </form>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            {% if sub.progresoSub < 50 %}
+
+                            <td class="col1">
+                                <p class="col1">{{ sub.tituloSub }}</p>
+                            </td>
+                            <td class="col2">
+                                <p class="col2">{{ sub.propositoSub }}</p>
+                            </td>
+                            <td class="col3">
+                                <p class="col3">{{ sub.progresoSub }}</p>
+                            </td>
+                            <td class="col4">
+                                <p class="col4">{{ sub.fechaIniSub }}</p>
+                            </td>
+                            <td class="col5">
+                                <p class="col5">{{ sub.fechaPrevistaFinSub }}</p>
+                            </td>
+                            <td class="col6">
+
+                            </td>
+                            
+                            <td class="col7">
+                                <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
+                                    data-target="#ModificarSubActividad">Editar</button>
+                                
+                                    <form action="dSub" method="post">
+                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                        <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
+                                    </form>
+                            </td>
+
+                            {% endif %}
+                        </tr>
+                        <!--Ventana modal para MODIFICAR una subactividad-->
+                        <div id="ModificarSubActividad" class="modal fade" tabindex="-1" role="dialog"
+                            aria-labelledby="editarSubActividad" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 id="editarSubActividad" class="modal-title">Editar Subactividad</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="uSubActividad" method="post">
+                                            <input name="idSub" type="hidden" value="{{ sub.idSub }}">
+                                            <div class="form-group">
+                                                <label for="idAct" class="col-form-label">De la actividad:</label>
+                                                <select name="idAct" id="idAct" class="col-md-12 form-control">
+                                                    <option value="{{sub.idAct}}">{{ sub.tituloAct }}</option>
+                                                    {% for act in actividad %}
+                                                    <option value="{{act.idAct}}">{{act.tituloAct}} </option>
+                                                    {% else %}
+                                                    <option value="">No hay registros</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Titulo
+                                                    Subactividad</label>
+                                                <input type="text" class="form-control" id="tituloAct" name="tituloSub"
+                                                    value="{{ sub.tituloSub }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Proposito:</label>
+                                                <textarea class="form-control" id="propositoSub"
+                                                    name="propositoSub">{{ sub.propositoSub }}</textarea>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="fechaPrevistaFinSub" class="col-form-label">Fecha
+                                                        limite:</label>
+                                                    <input type="datetime-local" class="form-control"
+                                                        id="fechaPrevistaFinSub" name="fechaPrevistaFinSub" value="">
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="progresoSub" class="col-form-label">Progreso:</label>
+                                                    <input type="text" class="form-control" id="progresoSub"
+                                                        name="progresoSub" value="{{ sub.progresoSub }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                {% if sub.subFinalizada == 'y' %}
+                                                <div class="radio custom-control custom-radio"
+                                                    onclick="manejoRadioModificarF('subFinalizada{{ sub.idSub }}', 'subPorRealizar{{ sub.idSub }}')">
+                                                    <input type="radio" id="subFinalizada{{ sub.idSub }}"
+                                                        class="custom-control-input" name="actFinalizada" checked>
+                                                    <label class="custom-control-label" for="subFinalizada">Actividad
+                                                        finalizada</label>
+                                                </div>
+
+                                                <div class="radio custom-control custom-radio"
+                                                    onclick="manejoRadioModificarP('subFinalizada{{ sub.idSub }}', 'subPorRealizar{{ sub.idSub }}')">
+                                                    <input type="radio" id="subPorRealizar{{ sub.idSub }}"
+                                                        class="custom-control-input" name="subPorRealizar">
+                                                    <label class="custom-control-label" for="subPorRealizar">Actividad
+                                                        por realizar</label>
+                                                </div>
+                                                {% else %}
+                                                <div class="radio custom-control custom-radio"
+                                                    onclick="manejoRadioModificarF('subFinalizada{{ sub.idSub }}', 'subPorRealizar{{ sub.idSub }}')">
+                                                    <input type="radio" id="subFinalizada{{ sub.idSub }}"
+                                                        class="custom-control-input" name="subFinalizada">
+                                                    <label class="custom-control-label" for="subFinalizada">Actividad
+                                                        finalizada</label>
+                                                </div>
+
+                                                <div class="radio custom-control custom-radio"
+                                                    onclick="manejoRadioModificarP('subFinalizada{{ sub.idSub }}', 'subPorRealizar{{ sub.idSub }}')">
+                                                    <input type="radio" id="subPorRealizar{{ sub.idSub }}"
+                                                        class="custom-control-input" name="subPorRealizar" checked>
+                                                    <label class="custom-control-label" for="subPorRealizar">Actividad
+                                                        por
+                                                        realizar</label>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Editar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <tr>
+                            <td colspan="7">Sin registros</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div>
+                    <button id="agregarButton" class="btn btn-primary" data-toggle="modal"
+                        data-target="#nuevaSubActividad">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- AGREAR nueva SUBactividad-->
+    <div id="nuevaSubActividad" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="agregarSubActividad"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="agregarActividad" class="modal-title">Crear Nueva Actividad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="iSubActividad" method="POST">
+                        <div class="form-group">
+                            <label for="idAct" class="col-form-label">De la actividad:</label>
+                            <select name="idAct" id="idAct" class="col-md-12 form-control">
+                                <option value="">Seleciona una actividad ...</option>
+                                {% for act in actividad %}
+                                <option value="{{act.idAct}}">{{act.tituloAct}} </option>
+                                {% else %}
+                                <option value="">No hay registros</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Titulo Subactividad</label>
+                            <input type="text" class="form-control" id="tituloSub" name="tituloSub">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Proposito:</label>
+                            <textarea class="form-control" id="propositoSub" name="propositoSub"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="fechaPrevistaFinSub" class="col-form-label">Fecha limite:</label>
+                                <input type="datetime-local" class="form-control" id="fechaPrevistaFinSub"
+                                    name="fechaPrevistaFinSub">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="progresoSub" class="col-form-label">Progreso:</label>
+                                <input type="text" class="form-control" id="progresoSub" name="progresoSub">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="radio custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="subFinalizada"
+                                    name="subFinalizada">
+                                <label class="custom-control-label" for="subFinalizada">Actividad finalizada</label>
+                            </div>
+
+                            <div class="radio custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="subPorRealizar"
+                                    name="subPorRealizar">
+                                <label class="custom-control-label" for="subPorRealizar">Actividad por realizar</label>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Crear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

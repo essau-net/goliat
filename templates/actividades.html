@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
 {% endblock %}
 {% block script%}
-<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+<script src="{{url_for('static', filename = 'js/actividad.js')}}"></script>
 {% endblock %}
 {% block content %}
 
@@ -28,8 +28,12 @@
         </li>
         <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i class="fas fa-user"></i>
             Perfil</a></li>
+        <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i class="fas fa-users"></i>
+            Grupos</a></li>
         <li class="nav-item"><a id="actividadesM" class="nav-link active" href="/sActividad"> <i
-              class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
+              class="far fa-check-square"></i> Actividades</a></li>
+        <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sSubAll"><i class="fas fa-tasks"></i>
+            Subactividades</a></li>
         <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/uploadPerfil"> <i
               class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
       </ul>
@@ -74,9 +78,10 @@
 
               <div class="dropdown-menu">
                 <!-- ABRE ventana modal para AGREGAR la actividad-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad"></button>
                   <!-- ABRE ventana modal para EDITAR la actividad -->
-                  <button class="dropdown-item" data-toggle="modal" data-target="#modificarActividad">Modificar</button>
+                  <button class="dropdown-item" data-toggle="modal"
+                    data-target="#modificarActividad{{ act.idAct }}">Modificar</button>
                   <div class="dropdown-divider"></div>
                   <!--ELIMINA actividad-->
                   <a class="dropdown-item" href="/dActividad{{act.idAct}}">Eliminar</a>
@@ -91,118 +96,142 @@
             </div>
 
           </section>
-          <div class="card-header">{{act.tituloAct}}
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><b>Proposito: </b><br />{{act.propositoAct}}</li>
-              <li class="list-group-item"><b>Empezo: </b> <br />{{act.fechaIniAct}}</li>
-              <li class="list-group-item"><b>Finalizara: </b> <br />{{act.fechaPrevistaFin}}</li>
-            </ul>
-            <a href="#" class="btn btn-primary">SubActividades</a>
+          <div class="card-header">{{ act.tituloAct }}
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Proposito: </b><br />{{ act.propositoAct }}</li>
+                <li class="list-group-item"><b>Empezo: </b> <br />{{ act.fechaIniAct }}</li>
+                <li class="list-group-item"><b>Finalizara: </b> <br />{{ act.fechaPrevistaFin }}</li>
+              </ul>
+              <a href="#" class="btn btn-primary">SubActividades</a>
+            </div>
           </div>
         </div>
+        <!-- Ventana para MODIFICAR actividad-->
+        <div id="modificarActividad{{ act.idAct }}" class="modal fade" tabindex="-1" role="dialog"
+          aria-labelledby="editarActividad" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title"> Editar actividad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="uActividad" method="POST">
+                  <input type="hidden" name="idAct" value="{{ act.idAct }}">
+                  <div class="form-group">
+                    <label for="tituloAct" class="col-form-label">Titulo actividad</label>
+                    <input type="text" class="form-control" id="tituloAct" name="tituloAct" value="{{ act.tituloAct }}">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
+                    <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Proposito:</label>
+                    <textarea class="form-control" id="propositoAct"
+                      name="propositoAct">{{ act.propositoAct }}</textarea>
+                  </div>
+
+                  {% if act.actFinalizada == 'y' %}
+                  <div class="radio custom-control custom-radio"
+                    onclick="manejoRadioModificarF('actFinalizada{{ act.idAct }}', 'actPorRealizar{{ act.idAct }}')">
+                    <input type="radio" id="actFinalizada{{ act.idAct }}" class="custom-control-input actFinalizadaM"
+                      name="actFinalizada" checked>
+                    <label class="custom-control-label" for="actFinalizadaM">Actividad finalizada</label>
+                  </div>
+
+                  <div class="radio custom-control custom-radio"
+                    onclick="manejoRadioModificarP('actFinalizada{{ act.idAct }}', 'actPorRealizar{{ act.idAct }}')">
+                    <input type="radio" id="actPorRealizar{{ act.idAct }}" class="custom-control-input actPorRealizarM"
+                      name="actPorRealizar">
+                    <label class="custom-control-label" for="actPorRealizarM">Actividad por realizar</label>
+                  </div>
+                  {% else %}
+                  <div class="radio custom-control custom-radio"
+                    onclick="manejoRadioModificarF('actFinalizada{{ act.idAct }}', 'actPorRealizar{{ act.idAct }}')">
+                    <input type="radio" id="actFinalizada{{ act.idAct }}" class="custom-control-input"
+                      name="actFinalizada">
+                    <label class="custom-control-label" for="actFinalizadaM">Actividad finalizada</label>
+                  </div>
+
+                  <div class="radio custom-control custom-radio"
+                    onclick="manejoRadioModificarP('actFinalizada{{ act.idAct }}', 'actPorRealizar{{ act.idAct }}')">
+                    <input type="radio" id="actPorRealizar{{ act.idAct }}" class="custom-control-input actPorRealizarM"
+                      name="actPorRealizar" checked>
+                    <label class="custom-control-label" for="actPorRealizarM">Actividad por realizar</label>
+                  </div>
+                  {% endif %}
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <h3>No hay registros</h3>
+        {% endfor %}
       </div>
-      {% else %}
-      <h3>No hay registros</h3>
-      {% endfor %}
+
     </div>
 
-  </div>
+    <!-- Ventana modal para AGREGAR actividad -->
+    <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="agregarActividad"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agregarActividad">Crear actividad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="iActividad" method="POST">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Titulo actividad</label>
+                <input type="text" class="form-control" id="tituloAct" name="tituloAct">
+              </div>
 
-  <!-- Ventana modal para AGREGAR actividad -->
-  <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="agregarActividad"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="agregarActividad">Crear actividad</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="iActividad" method="POST">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Titulo actividad</label>
-              <input type="text" class="form-control" id="tituloAct" name="tituloAct">
-            </div>
+              <div class="form-group">
+                <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
+                <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
+              </div>
 
-            <div class="form-group">
-              <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
-              <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
-            </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Proposito:</label>
+                <textarea class="form-control" id="propositoAct" name="propositoAct"></textarea>
+              </div>
 
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Proposito:</label>
-              <textarea class="form-control" id="propositoAct" name="propositoAct"></textarea>
-            </div>
+              <div class="form-group">
+                <div class="radio custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="actFinalizada" name="actFinalizada">
+                  <label class="custom-control-label" for="actFinalizada">Actividad finalizada</label>
+                </div>
 
-            <div class="radio custom-control custom-radio">
-              <input type="radio" class="custom-control-input" id="actFinalizada" name="actFinalizada">
-              <label class="custom-control-label" for="actFinalizada">Actividad finalizada</label>
-            </div>
+                <div class="radio custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="actPorRealizar" name="actPorRealizar">
+                  <label class="custom-control-label" for="actPorRealizar">Actividad por realizar</label>
+                </div>
+              </div>
 
-            <div class="radio custom-control custom-radio">
-              <input type="radio" class="custom-control-input" id="actPorRealizar" name="actPorRealizar">
-              <label class="custom-control-label" for="actPorRealizar">Actividad por realizar</label>
-            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Crear</button>
+              </div>
+            </form>
+          </div>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Crear</button>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!-- Ventana para MODIFICAR actividad-->
-  <div id="modificarActividad" class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog"
-    aria-labelledby="editarActividad" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"> Editar actividad</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="iActividad" method="POST">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Titulo actividad</label>
-              <input type="text" class="form-control" id="tituloAct" name="tituloAct">
-            </div>
-
-            <div class="form-group">
-              <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
-              <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
-            </div>
-
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Proposito:</label>
-              <textarea class="form-control" id="propositoAct" name="propositoAct"></textarea>
-            </div>
-
-            <div class="radio custom-control custom-radio">
-              <input type="radio" class="custom-control-input" id="actFinalizadaM" name="actFinalizada">
-              <label class="custom-control-label" for="actFinalizadaM">Actividad finalizada</label>
-            </div>
-
-            <div class="radio custom-control custom-radio">
-              <input type="radio" class="custom-control-input" id="actPorRealizarM" name="actPorRealizar">
-              <label class="custom-control-label" for="actPorRealizarM">Actividad por realizar</label>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Crear</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
-  </div>
 </section>
 {% endblock %}

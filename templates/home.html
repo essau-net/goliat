@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
 {% endblock %}
 {% block script%}
-<script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+
 {% endblock %}
 {% block content %}
 
@@ -18,8 +18,12 @@
         </li>
         <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i class="fas fa-user"></i>
             Perfil</a></li>
+        <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i class="fas fa-users"></i>
+            Grupos</a></li>
         <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sActividad"> <i
-              class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
+              class="far fa-check-square"></i> Actividades</a></li>
+        <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sSubAll"><i class="fas fa-tasks"></i>
+            Subactividades</a></li>
       </ul>
     </div>
 

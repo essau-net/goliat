@@ -1,0 +1,34 @@
+{%extends 'layout.html' %}
+{% block title%} Goliat - Perfil {% endblock%}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
+{% endblock %}
+{% block script%}
+<!--<script src="{{url_for('static', filename = 'js/main.js')}}"></script>-->
+{% endblock %}
+{% block content %}
+
+<section id="paginaPerfil" class="container paginasUsuario">
+    <div class="row">
+        <!-- *******************************        MENU FRONTAL    *************************************************************-->
+        <div class="col-lg-3 col-md-3 menu-lateral">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/home"> <i
+                            class="fa fa-home fa-fw"></i>
+                        Home</a>
+                </li>
+                <li class="nav-item"><a id="perfilM" class="nav-link active" href="/sPerfil"> <i
+                            class="fas fa-user"></i>
+                        Perfil</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i
+                            class="fas fa-users"></i> Grupos</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sActividad"> <i
+                            class="far fa-check-square"></i> Actividades</a></li>
+                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sSub"><i
+                            class="fas fa-tasks"></i> Subactividades</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+</section>
