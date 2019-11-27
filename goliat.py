@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, jsonify, make_response, redirect, url_for, session, flash
 from flask_mysqldb import MySQL, MySQLdb
 from flask_bcrypt import bcrypt
 from PIL import Image
@@ -418,19 +418,24 @@ def sGrupos():
     usuario = selUsuarios.fetchall()
     selUsuarios.close()
     return render_template('grupo.html', grupos = grupo, usuarios = usuario)
-@goliatApp.route('/iGrupo', methods=["GET"])
+
+@goliatApp.route('/iGrupos', methods=["POST"])
 def iGrupo():
-    idEncargado = request.form["idEncargado"]
-    idUsuarios = request.form.getlist["idUsuario"]
-    nombreGrupo = request.form["nombreGrupo"]
-    for usuario in  idUsuarios:
+    idUsuarios = request.get_json()
+    res = make_response(jsonify({"messsge": "OK"}), 200)
+    print("\n\n\n",idUsuarios, "\n\n\n")
+    
+    idEncargado = request.form['idEncargado']
+    nombreGrupo = request.form['nombreGrupo']
+    time.sleep(10)
+    for idUsua in  idUsuarios:
         selGrupo = mysql.connection.cursor()
         selGrupo.execute(
             "INSERT INTO grupo (idUsuario, idEncargado, nombreGrupo) VALUES(%s, %s, %s)",
-            (usuario, idEncargado, nombreGrupo)
-        )
-    return redirect(url_for(sGrupos))
-
+            (idUsua, idEncargado, nombreGrupo)
+        ) 
+    time.sleep(30)
+    return redirect(url_for('sGrupos'), res)
 if __name__ == '__main__':
     goliatApp.secret_key = 'goliatGana'
     goliatApp.run(port=3000, debug=True)

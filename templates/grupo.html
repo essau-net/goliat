@@ -61,12 +61,12 @@
                                     <span aria-hidden="true">&times;</span>
                             </div>
                             <div class="modal-body">
-                                <form action="iGrupo" method="GET">
+                                <form action="iGrupos" method="POST">
                                     <div class="form-group">
                                         <label for="idEncargado" class="col-form-control">Encargado:</label>
                                         <select name="idEncargado" id="idEncargado" class="form-control">
                                             {% for usuario in usuarios %}
-                                            <option value="{{ usuario.idUsuario }}">{{ usuario.nombresUsua }}
+                                            <option name= "idEncargado" value="{{ usuario.idUsuario }}">{{ usuario.nombresUsua }}
                                                 {{ usuario.apellidosUsua }}</option>
                                             {% else %}
                                             <option value="">No hay registros</option>
@@ -94,7 +94,7 @@
                                         <input type="text" id="nombreGrupo" class="form-control" name="nombreGrupo">
                                     </div>
                                     <button type="submit" class="btn btn-secondary">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Crear</button>
+                                    <button type="submit" id="nuevoGrupo" onclick="pasandoIntegrantes()" class="btn btn-primary">Crear</button>
                                 </form>
                             </div>
                         </div>
