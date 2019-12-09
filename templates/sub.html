@@ -13,15 +13,15 @@
         <!-- *******************************        MENU FRONTAL    *************************************************************-->
         <div class="col-lg-3 col-md-3 menu-lateral">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/home"> <i
-                            class="fa fa-home fa-fw"></i>
-                        Home</a>
-                </li>
                 <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i
                             class="fas fa-user"></i>
                         Perfil</a></li>
                 <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i
                             class="fas fa-users"></i> Grupos</a></li>
+                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/sProyecto"> <i
+                            class="fa fa-home fa-fw"></i>
+                        Proyectos</a>
+                </li>
                 <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sActividad"> <i
                             class="far fa-check-square"></i> Actividades</a></li>
                 <li class="nav-item"><a id="actividadesM" class="nav-link active" href="/sSub"><i
@@ -68,12 +68,13 @@
                             </td>
                             <td class="col7">
                                 <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
-                                    data-target="#ModificarSubActividad">Editar</button>
-                                
-                                    <form action="dSub" method="post">
-                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
-                                        <input type="submit" class="btn btn-danger botonEditarEliminar" name="idSub" value="Eliminar">
-                                    </form>
+                                    data-target="#ModificarSubActividad{{ sub.idSub }}">Editar</button>
+
+                                <form action="dSub" method="post">
+                                    <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                    <input type="submit" class="btn btn-danger botonEditarEliminar" name="idSub"
+                                        value="Eliminar">
+                                </form>
                             </td>
                             {% endif %}
                         </tr>
@@ -100,12 +101,12 @@
                             </td>
                             <td class="col7">
                                 <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
-                                    data-target="#ModificarSubActividad">Editar</button>
-                                
-                                    <form action="dSub" method="post">
-                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
-                                        <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
-                                    </form>
+                                    data-target="#ModificarSubActividad{{ sub.idSub }}">Editar</button>
+
+                                <form action="dSub" method="post">
+                                    <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                    <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
+                                </form>
                             </td>
                             {% endif %}
                         </tr>
@@ -130,21 +131,21 @@
                             <td class="col6">
 
                             </td>
-                            
+
                             <td class="col7">
                                 <button class="btn btn-primary botonEditarEliminar" data-toggle="modal"
-                                    data-target="#ModificarSubActividad">Editar</button>
-                                
-                                    <form action="dSub" method="post">
-                                        <input type="hidden" name="idSub" value="{{ sub.idSub }}">
-                                        <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
-                                    </form>
+                                    data-target="#ModificarSubActividad{{ sub.idSub }}">Editar</button>
+
+                                <form action="dSub" method="post">
+                                    <input type="hidden" name="idSub" value="{{ sub.idSub }}">
+                                    <input type="submit" class="btn btn-danger botonEditarEliminar" value="Eliminar">
+                                </form>
                             </td>
 
                             {% endif %}
                         </tr>
                         <!--Ventana modal para MODIFICAR una subactividad-->
-                        <div id="ModificarSubActividad" class="modal fade" tabindex="-1" role="dialog"
+                        <div id="ModificarSubActividad{{ sub.idSub }}" class="modal fade" tabindex="-1" role="dialog"
                             aria-labelledby="editarSubActividad" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -160,6 +161,7 @@
                                                     <option value="{{sub.idAct}}">{{ sub.tituloAct }}</option>
                                                     {% for act in actividad %}
                                                     <option value="{{act.idAct}}">{{act.tituloAct}} </option>
+
                                                     {% else %}
                                                     <option value="">No hay registros</option>
                                                     {% endfor %}
@@ -267,11 +269,11 @@
                 <div class="modal-body">
                     <form action="iSubActividad" method="POST">
                         <div class="form-group">
-                            <label for="idAct" class="col-form-label">De la actividad:</label>
-                            <select name="idAct" id="idAct" class="col-md-12 form-control">
+                            <label for="idPermiso" class="col-form-label">De la actividad:</label>
+                            <select name="idPermiso" id="idPermiso" class="col-md-12 form-control">
                                 <option value="">Seleciona una actividad ...</option>
                                 {% for act in actividad %}
-                                <option value="{{act.idAct}}">{{act.tituloAct}} </option>
+                                <option value="{{act.idPermiso}}">{{act.tituloAct}}</option>
                                 {% else %}
                                 <option value="">No hay registros</option>
                                 {% endfor %}

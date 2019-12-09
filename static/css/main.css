@@ -208,7 +208,13 @@ input.btn.btn-outline-light.btn-block{
     width: 80px;
     margin: 5px 0;
 }
-
+/* Estilo de la pagina Proyecto*/
+.proyecto{
+    display: inline;
+}
+#botonAgregarProyec{
+    display: block;
+}
 /* Uso general en en las paginas de los usuarios*/
 .normal{
     background-color: #1f1f1f;
@@ -248,8 +254,6 @@ input.btn.btn-outline-light.btn-block{
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    
-    
   }
   
   /* Create a custom checkbox */
@@ -292,4 +296,72 @@ input.btn.btn-outline-light.btn-block{
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+/*--------      Estilo pagina proyecto      --------- */
+.containerProyecto{
+    float: left;
+}
+.proyecto{
+    float: left;
+    position: static;
+}
+
+.anchoProyecto{
+    width: 20rem;
+    float: left;
+    min-height: 15rem;
+    margin: 10px 9px;
+}
+.dotMenuProyecto{
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #d9d9d9;
+    z-index: 2;
+    font-size: 25px;
+    padding: 0px;   
+    position: absolute;
+    height: 40px;
+    top: 10px;
+    left: 90px;
+}
+.dotMenuProyecto:hover{
+    background-color: #565656;
+}
+/* ---------------      Estilo pagina Grupo       ----------------*/
+.tamanioGrupo{
+    float: left;
+    min-height: 15rem;
+    width: 25rem;
+    margin: 5px 3px;
+}
+.tablaGrupos{
+    display: flex;
+    margin-top: 30px;
+    float: left;
+    
+}
+.grupo{
+    float: left;
+    position: static;
+}
+.dotMenuGrupo{
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #d9d9d9;
+    z-index: 2;
+    font-size: 25px;
+    padding: 0px;   
+    position: absolute;
+    height: 40px;
+    bottom: 24px;
+    right: 10px;
+    
+}
+
+.dotMenuGrupo:hover{
+    background-color: #565656;
+}
+.botonAgregar{
+    float: right;
+    
 }

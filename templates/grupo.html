@@ -6,6 +6,12 @@
 {% block script%}
 <script src="{{url_for('static', filename = 'js/grupo.js')}}"></script>
 {% endblock %}
+{% block scriptHead %}
+<script>
+    var tablaGrupo = {{ integrantes| safe}}
+    console.log(tablaGrupo)
+</script>
+{% endblock%}
 {% block content %}
 
 <section id="paginaPerfil" class="container paginasUsuario">
@@ -13,14 +19,14 @@
         <!-- *******************************        MENU FRONTAL    *************************************************************-->
         <div class="col-lg-3 col-md-3 menu-lateral">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/home"> <i
+                <li class="nav-item"><a id="homeM" class="nav-link normal" href="/sProyecto"> <i
                             class="fa fa-home fa-fw"></i>
-                        Home</a>
+                        Proyectos</a>
                 </li>
-                <li class="nav-item"><a id="perfilM" class="nav-link active" href="/sPerfil"> <i
+                <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i
                             class="fas fa-user"></i>
                         Perfil</a></li>
-                <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sGrupos"> <i
+                <li class="nav-item"><a id="actividadesM" class="nav-link active" href="/sGrupos"> <i
                             class="fas fa-users"></i> Grupos</a></li>
                 <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sActividad"> <i
                             class="far fa-check-square"></i> Actividades</a></li>
@@ -33,13 +39,93 @@
         <div class="container col-lg-9 col-md-9">
             <div class="row">
                 {% for grupo in grupos %}
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card tamanioGrupo">
+                    <div class="tablaGrupos">
+                        <div class="grupo">
+                            <img src="" class="card-img-top" alt="">
+                            <div>
+                                <div class="card-header">
+                                    {{ grupo.nombreGrupo }}
+                                </div>
+                                <ul id="{{ grupo.nombreGrupo }}" class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Encargado: </b>{{ grupo.nombresUsua }}
+                                        {{ grupo.apellidosUsua }} </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger dotMenuGrupo" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                &#10247;
+                            </button>
+                            <div class="dropdown-menu">
+                                <!-- ABRE ventana modal para AGREGAR la actividad-->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#nuevaActividad"></button>
+                                <!-- ABRE ventana modal para EDITAR la actividad -->
+                                <button class="dropdown-item" data-toggle="modal" data-target="#editarGrupo{{ grupo.nombreGrupo }}">Modificar</button>
+                                <div class="dropdown-divider"></div>
+                                <!--ELIMINA actividad-->
+                                <form action="dGrupo" method="POST">
+                                    <input type="hidden" name="idGrupo" value="{{ grupo.idGrupo }}">
+                                    <button  type="submit" id="salirGrupo{{ grupo.idGrupo }}" class="dropdown-item">Salir</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal EDITAR GRUPO-->
+                <div id="editarGrupo{{ grupo.nombreGrupo }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modificarGrupo"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Crear un Grupo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label for="idEncargado" class="col-form-control">Encargado:</label>
+                                        <select name="idEncargado" id="modificarEncargado{{ grupo.nombreGrupo }}" class="form-control">
+                                            <option value="{{grupo.idEncargado}}">{{ grupo.nombresUsua }} {{ grupo.apellidosUsua }}</option>
+                                            {% for encargado in usuarios %}
+                                            <option name="idEncargado" value="{{ encargado.idUsuario }}">
+                                                {{ encargado.nombresUsua }}
+                                                {{ encargado.apellidosUsua }}</option>
+                                            {% else %}
+                                            <option value="">No hay registros</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <label for="">Integrantes</label>
+                                    {% for usuario in usuarios %}
+                                    <div id="grupo{{ grupo.idUsuario }}" class="form-check"
+                                        onclick="editar('modificar{{ usuario.idUsuario }}{{ grupo.nombreGrupo }}', '{{ grupo.nombreGrupo}}')">
+                                        <label for="idUsuarioI" class="form-check-label containerLabel">
+                                            {{ usuario.nombresUsua }}
+                                            {{ usuario.apellidosUsua }}
+                                            <input type="checkbox" id="modificar{{ usuario.idUsuario}}{{ grupo.nombreGrupo}}"
+                                                class="form-check-input modificandoCheckbox" name="idUsuario"
+                                                value="{{ usuario.idUsuario }}">
+                                            <span class="seleccionado"></span>
+                                        </label>
+                                    </div>
+                                    {% else %}
+                                    <label>No hay registros</label>
+                                    {% endfor %}
+                                    <input type="hidden" value="{{grupo.nombreGrupo}}" id="anteriorNombre{{grupo.nombreGrupo}}">
+                                    <div class="form-group">
+                                        <label for="nombreGrupo" class="col-form-label">Nombre del Grupo:</label>
+                                        <input type="text" id="nombreGrupo{{ grupo.nombreGrupo }}" class="form-control" name="nombreGrupo" value="{{ grupo.nombreGrupo }}">
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Cancelar</button>
+                                    <button type="submit" id="modificarGrupo{{ grupo.nombreGrupo }}" onclick="editandoIntegrantes('{{ grupo.nombreGrupo }}','modificarEncargado{{ grupo.nombreGrupo }}','nombreGrupo{{ grupo.nombreGrupo }}'), 'anteriorNombre{{grupo.nombreGrupo}}'"
+                                        class="btn btn-primary">Crear</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,9 +133,11 @@
                 <h3>No eres parte de un grupo</h3>
                 {% endfor %}
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearGrupo">
+                <button id="botonAgregar" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#crearGrupo">
                     Agregar
                 </button>
+                <div class="limpiar"></div>
                 <!-- CREAR un grupo -->
                 <div id="crearGrupo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="hacerGrupo"
                     aria-hidden="true">
@@ -61,12 +149,13 @@
                                     <span aria-hidden="true">&times;</span>
                             </div>
                             <div class="modal-body">
-                                <form action="iGrupos" method="POST">
+                                <form method="POST">
                                     <div class="form-group">
                                         <label for="idEncargado" class="col-form-control">Encargado:</label>
                                         <select name="idEncargado" id="idEncargado" class="form-control">
                                             {% for usuario in usuarios %}
-                                            <option name= "idEncargado" value="{{ usuario.idUsuario }}">{{ usuario.nombresUsua }}
+                                            <option name="idEncargado" value="{{ usuario.idUsuario }}">
+                                                {{ usuario.nombresUsua }}
                                                 {{ usuario.apellidosUsua }}</option>
                                             {% else %}
                                             <option value="">No hay registros</option>
@@ -76,12 +165,14 @@
 
                                     <label for="">Integrantes</label>
                                     {% for usuario in usuarios %}
-                                    <div id="grupo{{ usuario.idUsuario }}" class="form-check" onclick="seleccionado('integrante{{ usuario.idUsuario }}')">
+                                    <div id="grupo{{ usuario.idUsuario }}" class="form-check"
+                                        onclick="seleccionado('agregar{{ usuario.idUsuario }}')">
                                         <label for="idUsuarioI" class="form-check-label containerLabel">
                                             {{ usuario.nombresUsua }}
                                             {{ usuario.apellidosUsua }}
-                                            <input type="checkbox" id="integrante{{ usuario.idUsuario }}"
-                                                class="form-check-input" name="idUsuario" value="{{ usuario.idUsuario }}">
+                                            <input type="checkbox" id="agregar{{ usuario.idUsuario }}"
+                                                class="form-check-input" name="idUsuario"
+                                                value="{{ usuario.idUsuario }}">
                                             <span class="seleccionado"></span>
                                         </label>
                                     </div>
@@ -94,7 +185,8 @@
                                         <input type="text" id="nombreGrupo" class="form-control" name="nombreGrupo">
                                     </div>
                                     <button type="submit" class="btn btn-secondary">Cancelar</button>
-                                    <button type="submit" id="nuevoGrupo" onclick="pasandoIntegrantes()" class="btn btn-primary">Crear</button>
+                                    <button type="submit" id="nuevoGrupo" onclick="pasandoIntegrantes()"
+                                        class="btn btn-primary">Crear</button>
                                 </form>
                             </div>
                         </div>

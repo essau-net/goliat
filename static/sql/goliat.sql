@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.0
--- http://www.phpmyadmin.net
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 20-11-2019 a las 17:40:52
--- Versión del servidor: 5.7.12-log
--- Versión de PHP: 7.0.5
+-- Host: localhost
+-- Generation Time: Dec 05, 2019 at 05:59 AM
+-- Server version: 5.7.27-log
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,22 +19,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `goliat`
+-- Database: `goliat`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `actividad`
+-- Table structure for table `actividad`
 --
 
 CREATE TABLE `actividad` (
   `idAct` int(11) NOT NULL,
   `tituloAct` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `propositoAct` text COLLATE utf8_spanish_ci,
-  `propietarioAct` int(11) NOT NULL,
   `progresoAct` int(11) NOT NULL,
   `actFinalizada` varchar(1) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numeroSubAct` int(11) NOT NULL DEFAULT '0',
+  `numeroSubFinalizadas` int(11) NOT NULL DEFAULT '0',
   `fechaIniAct` datetime NOT NULL,
   `fechaFinAct` datetime DEFAULT NULL,
   `fechaPrevistaFin` datetime DEFAULT NULL,
@@ -40,60 +43,87 @@ CREATE TABLE `actividad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `actividad`
+-- Dumping data for table `actividad`
 --
 
-INSERT INTO `actividad` (`idAct`, `tituloAct`, `propositoAct`, `propietarioAct`, `progresoAct`, `actFinalizada`, `fechaIniAct`, `fechaFinAct`, `fechaPrevistaFin`, `iconA`) VALUES
-(4, 'Prueba', 'nbkjn', 6, 0, 'n', '2019-11-07 00:00:00', NULL, '2020-05-30 02:00:00', NULL),
-(5, 'Hola', 'sdsdsd', 6, 0, 'n', '2019-11-11 20:26:33', NULL, '2019-03-01 02:01:00', NULL),
-(6, 'Hola', 'asasasasasasasasas', 4, 35, 'n', '2019-11-26 00:00:00', '2019-11-28 00:00:00', '2019-11-28 00:00:00', NULL);
+INSERT INTO `actividad` (`idAct`, `tituloAct`, `propositoAct`, `progresoAct`, `actFinalizada`, `numeroSubAct`, `numeroSubFinalizadas`, `fechaIniAct`, `fechaFinAct`, `fechaPrevistaFin`, `iconA`) VALUES
+(32, 'David', 'Acabar Goliat', 0, 'n', 3, 1, '2019-11-30 09:23:09', NULL, '2020-01-02 00:00:00', NULL),
+(33, 'Nintendo', 'Ganar torneo', 100, 'y', 1, 2, '2019-11-30 09:34:18', '2019-11-30 09:34:18', '2019-01-01 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cronograma`
+-- Table structure for table `cronograma`
 --
 
 CREATE TABLE `cronograma` (
   `idCronograma` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  `idGrupo` int(11) NOT NULL,
-  `idAct` int(11) NOT NULL,
-  `idSub` int(11) NOT NULL,
-  `nombreProyecto` varchar(50) NOT NULL
+  `nombreProyecto` varchar(50) NOT NULL,
+  `descripcionProyecto` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cronograma`
+--
+
+INSERT INTO `cronograma` (`idCronograma`, `nombreProyecto`, `descripcionProyecto`) VALUES
+(9, 'Goliat', ''),
+(10, 'Smash', '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupo`
+-- Table structure for table `grupo`
 --
 
 CREATE TABLE `grupo` (
   `idGrupo` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idEncargado` int(11) NOT NULL,
-  `iconGrupo` blob NOT NULL
+  `nombreGrupo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `iconGrupo` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `grupo`
+--
+
+INSERT INTO `grupo` (`idGrupo`, `idUsuario`, `idEncargado`, `nombreGrupo`, `iconGrupo`) VALUES
+(23, 4, 4, 'Hector', NULL),
+(24, 6, 4, 'Hector', NULL),
+(25, 4, 4, 'goliat', NULL),
+(26, 6, 4, 'goliat', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permiso`
+-- Table structure for table `permiso`
 --
 
 CREATE TABLE `permiso` (
   `idPermiso` int(11) NOT NULL,
-  `idAct` int(11) NOT NULL,
-  `idSub` int(11) NOT NULL,
+  `idCronograma` int(11) NOT NULL,
+  `idAct` int(11) DEFAULT NULL,
+  `idSub` int(11) DEFAULT NULL,
   `idUsuario` int(11) NOT NULL,
-  `nivelPermiso` varchar(1) COLLATE utf8mb4_spanish2_ci NOT NULL
+  `nivelPermiso` varchar(1) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Dumping data for table `permiso`
+--
+
+INSERT INTO `permiso` (`idPermiso`, `idCronograma`, `idAct`, `idSub`, `idUsuario`, `nivelPermiso`) VALUES
+(4, 9, NULL, NULL, 6, NULL),
+(5, 10, NULL, NULL, 6, NULL),
+(11, 9, 32, NULL, 6, NULL),
+(12, 10, 33, NULL, 6, NULL),
+(16, 9, 32, 6, 6, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `prueba`
+-- Table structure for table `prueba`
 --
 
 CREATE TABLE `prueba` (
@@ -102,7 +132,7 @@ CREATE TABLE `prueba` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `prueba`
+-- Dumping data for table `prueba`
 --
 
 INSERT INTO `prueba` (`idPrueba`, `imagen`) VALUES
@@ -113,17 +143,15 @@ INSERT INTO `prueba` (`idPrueba`, `imagen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sub_actividad`
+-- Table structure for table `sub_actividad`
 --
 
 CREATE TABLE `sub_actividad` (
   `idSub` int(11) NOT NULL,
-  `idAct` int(11) NOT NULL,
   `tituloSub` varchar(50) NOT NULL,
   `propositoSub` text,
   `progresoSub` int(11) NOT NULL,
-  `nivelImportanciaSub` int(11) NOT NULL,
-  `subActFinalizada` varchar(1) NOT NULL,
+  `subFinalizada` varchar(1) NOT NULL,
   `fechaIniSub` datetime NOT NULL,
   `fechaPrevistaFinSub` datetime NOT NULL,
   `fechaFinSub` datetime DEFAULT NULL,
@@ -131,21 +159,18 @@ CREATE TABLE `sub_actividad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `sub_actividad`
+-- Dumping data for table `sub_actividad`
 --
 
-INSERT INTO `sub_actividad` (`idSub`, `idAct`, `tituloSub`, `propositoSub`, `progresoSub`, `nivelImportanciaSub`, `subActFinalizada`, `fechaIniSub`, `fechaPrevistaFinSub`, `fechaFinSub`, `iconSub`) VALUES
-(1, 5, 'Probando', 'Probando relacion MySQL', 1, 3, 'n', '2019-11-20 00:00:00', '2019-11-23 00:00:00', NULL, NULL),
-(2, 5, 'Prueba', 'Naxxaaa', 0, 9, 'n', '2019-11-20 00:00:00', '2019-11-21 00:00:00', NULL, NULL),
-(3, 4, 'Gola', 'hooooooooooooooooooooooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOAaaaaaaaaaaaaaaaaaaasssssssssssssssssssssxxxxxxxxxxxxxxxxx', 0, 9, 'n', '2019-11-21 00:00:00', '2019-11-18 00:00:00', NULL, NULL),
-(8, 5, 'helow', 'HOOOOOOOOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAALLLLLLLLLLLLLAAAAAAAAAAAAAAAAAAAAAAAAAAA', 100, 9, 'y', '2019-11-04 00:00:00', '2019-11-09 00:00:00', '2019-11-08 00:00:00', NULL),
-(9, 6, 'Escuchar musiquita', 'Pues escuchar musica', 100, 1, 'Y', '2019-11-05 00:00:00', '2019-11-29 00:00:00', '2019-11-29 00:00:00', NULL),
-(10, 6, 'No, no es harina', 'Que se armen los ... \r\nAhorita vemos que pedo\r\nQue chingona esta tu vieja\r\n', 39, 1, 'n', '2019-11-05 00:00:00', '2019-11-22 00:00:00', NULL, NULL);
+INSERT INTO `sub_actividad` (`idSub`, `tituloSub`, `propositoSub`, `progresoSub`, `subFinalizada`, `fechaIniSub`, `fechaPrevistaFinSub`, `fechaFinSub`, `iconSub`) VALUES
+(1, '', 'Probar', 30, 'n', '2019-11-26 03:51:34', '2019-01-01 00:00:00', NULL, NULL),
+(2, 'Probando', 'Probar', 35, 'n', '2019-11-30 09:45:35', '2019-01-01 00:00:00', NULL, NULL),
+(6, 'Pelear', 'Cansarlo', 10, 'n', '2019-11-30 10:09:33', '2019-01-01 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -167,133 +192,129 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nombresUsua`, `apellidosUsua`, `fechaNaciUsua`, `numeroCelUsua`, `trabajoUsua`, `gradoUniUsua`, `paisOrigenUsua`, `estadoOrigenUsua`, `ciudadOrigenUsua`, `tipoUsua`, `usuario`, `emailUsua`, `contraUsua`, `imagenUsua`) VALUES
 (4, 'DANIEL ALEJANDRO', 'MARIN MARIN', '2001-12-11', '3321224121', 'Director de cine', 'Licenciatura en Cinematografia ', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'Danixt', 'daniel@gmail.com', '$2b$12$O.B/Oy8RxtdHZMHhFp2W3ergIJ.o8nb0Q8ETGakYBefQSDIpiWWm6', NULL),
-(6, 'HECTOR ESAU', 'MACIAS ', '2001-07-28', '12345678', '', 'Ingeniero en Nanotenologia', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'hesau2001', 'hesau2001@gmail.com', '$2b$12$Vt1oEoELDeay/99B.ryhiORwJwsDemQHHUuf2QONl13oXGTchczra', NULL);
+(6, 'HECTOR ESAU', 'MACIAS JAVIER', '2001-07-28', '12345678', '', 'Ingeniero en Nanotenologia', 'Mexico', 'Jalisco', 'Zapopan', NULL, 'hesau2001', 'hesau2001@gmail.com', '$2b$12$rd579eCRHoebbWn3SHOu6eFGBB9YbqbJFzpnO2YtWvHmMvrmwvb0K', NULL);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `actividad`
+-- Indexes for table `actividad`
 --
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`idAct`);
 
 --
--- Indices de la tabla `cronograma`
+-- Indexes for table `cronograma`
 --
 ALTER TABLE `cronograma`
-  ADD PRIMARY KEY (`idCronograma`),
-  ADD KEY `idGrupo` (`idGrupo`),
-  ADD KEY `idAct` (`idAct`),
-  ADD KEY `idSub` (`idSub`),
-  ADD KEY `idUsuario` (`idUsuario`);
+  ADD PRIMARY KEY (`idCronograma`);
 
 --
--- Indices de la tabla `grupo`
+-- Indexes for table `grupo`
 --
 ALTER TABLE `grupo`
   ADD PRIMARY KEY (`idGrupo`),
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Indices de la tabla `permiso`
+-- Indexes for table `permiso`
 --
 ALTER TABLE `permiso`
   ADD PRIMARY KEY (`idPermiso`),
   ADD KEY `idAct` (`idAct`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idSub` (`idSub`);
+  ADD KEY `idSub` (`idSub`),
+  ADD KEY `idCronograma` (`idCronograma`);
 
 --
--- Indices de la tabla `prueba`
+-- Indexes for table `prueba`
 --
 ALTER TABLE `prueba`
   ADD PRIMARY KEY (`idPrueba`);
 
 --
--- Indices de la tabla `sub_actividad`
+-- Indexes for table `sub_actividad`
 --
 ALTER TABLE `sub_actividad`
-  ADD PRIMARY KEY (`idSub`),
-  ADD KEY `idAct` (`idAct`);
+  ADD PRIMARY KEY (`idSub`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `actividad`
+-- AUTO_INCREMENT for table `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
--- AUTO_INCREMENT de la tabla `cronograma`
+-- AUTO_INCREMENT for table `cronograma`
 --
 ALTER TABLE `cronograma`
-  MODIFY `idCronograma` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCronograma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
--- AUTO_INCREMENT de la tabla `grupo`
+-- AUTO_INCREMENT for table `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
--- AUTO_INCREMENT de la tabla `permiso`
+-- AUTO_INCREMENT for table `permiso`
 --
 ALTER TABLE `permiso`
-  MODIFY `idPermiso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
--- AUTO_INCREMENT de la tabla `prueba`
+-- AUTO_INCREMENT for table `prueba`
 --
 ALTER TABLE `prueba`
   MODIFY `idPrueba` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT de la tabla `sub_actividad`
+-- AUTO_INCREMENT for table `sub_actividad`
 --
 ALTER TABLE `sub_actividad`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `cronograma`
---
-ALTER TABLE `cronograma`
-  ADD CONSTRAINT `cronograma_ibfk_1` FOREIGN KEY (`idAct`) REFERENCES `actividad` (`idAct`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cronograma_ibfk_2` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cronograma_ibfk_4` FOREIGN KEY (`idSub`) REFERENCES `sub_actividad` (`idSub`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cronograma_ibfk_5` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `grupo`
+-- Constraints for table `grupo`
 --
 ALTER TABLE `grupo`
   ADD CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `permiso`
+-- Constraints for table `permiso`
 --
 ALTER TABLE `permiso`
   ADD CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idSub`) REFERENCES `sub_actividad` (`idSub`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idAct`) REFERENCES `actividad` (`idAct`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `permiso_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `permiso_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permiso_ibfk_4` FOREIGN KEY (`idCronograma`) REFERENCES `cronograma` (`idCronograma`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

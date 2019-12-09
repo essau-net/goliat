@@ -1,3 +1,0 @@
-req = request.get_json()
-    print("\n\n\n\n\n", req, "\n\n\n\n\n")
-    res = make_response(jsonify({"messsge": "OK"}), 200)

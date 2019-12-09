@@ -23,8 +23,8 @@
     <!-- *******************************        MENU FRONTAL    *************************************************************-->
     <div class="col-lg-3 col-md-3 menu-lateral">
       <ul class="nav nav-pills flex-column">
-        <li class="nav-item"><a id="homeM" class="nav-link normal" href="/home"> <i class="fa fa-home fa-fw"></i>
-            Home</a>
+        <li class="nav-item"><a id="homeM" class="nav-link normal" href="/sProyecto"> <i class="fa fa-home fa-fw"></i>
+            Proyectos</a>
         </li>
         <li class="nav-item"><a id="perfilM" class="nav-link normal" href="/sPerfil"> <i class="fas fa-user"></i>
             Perfil</a></li>
@@ -34,8 +34,6 @@
               class="far fa-check-square"></i> Actividades</a></li>
         <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/sSubAll"><i class="fas fa-tasks"></i>
             Subactividades</a></li>
-        <li class="nav-item"><a id="actividadesM" class="nav-link normal" href="/uploadPerfil"> <i
-              class="fa fa-list-alt fa-fw"></i> Actividades</a></li>
       </ul>
     </div>
 
@@ -78,13 +76,14 @@
 
               <div class="dropdown-menu">
                 <!-- ABRE ventana modal para AGREGAR la actividad-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad"></button>
-                  <!-- ABRE ventana modal para EDITAR la actividad -->
-                  <button class="dropdown-item" data-toggle="modal"
-                    data-target="#modificarActividad{{ act.idAct }}">Modificar</button>
-                  <div class="dropdown-divider"></div>
-                  <!--ELIMINA actividad-->
-                  <a class="dropdown-item" href="/dActividad{{act.idAct}}">Eliminar</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  data-target="#nuevaActividad"></button>
+                <!-- ABRE ventana modal para EDITAR la actividad -->
+                <button class="dropdown-item" data-toggle="modal"
+                  data-target="#modificarActividad{{ act.idAct }}">Modificar</button>
+                <div class="dropdown-divider"></div>
+                <!--ELIMINA actividad-->
+                <a class="dropdown-item" href="/dActividad{{act.idAct}}">Eliminar</a>
               </div>
 
             </div>
@@ -121,14 +120,28 @@
               <div class="modal-body">
                 <form action="uActividad" method="POST">
                   <input type="hidden" name="idAct" value="{{ act.idAct }}">
+                  <input type="hidden" name="idPermiso" value="{{ act.idPermiso }}">
                   <div class="form-group">
                     <label for="tituloAct" class="col-form-label">Titulo actividad</label>
                     <input type="text" class="form-control" id="tituloAct" name="tituloAct" value="{{ act.tituloAct }}">
                   </div>
 
                   <div class="form-group">
+                    <label for="idProyectoM{{ act.idAct }}" class="col-form-label">Del proyecto:</label>
+                    <select name="idProyecto" id="idProyectoM{{ act.idAct }}" class="form-control">
+                      <option value="{{ act.idCronograma }}">{{ act.nombreProyecto}}</option>
+                      {% for proyecto in cronogramas %}
+                      <option value="{{ proyecto.idCronograma }}">{{ proyecto.nombreProyecto}}</option>
+                      {% else %}
+                      <option value="">No hay registros</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="form-group">
                     <label for="fechaPrevistaFin" class="col-form-label">Fecha y hora de finalizacion limite:</label>
-                    <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin">
+                    <input type="datetime-local" class="form-control" id="fechaPrevistaFin" name="fechaPrevistaFin"
+                      value="{{ act.fechaPrevistaFin}}">
                   </div>
 
                   <div class="form-group">
@@ -199,6 +212,17 @@
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Titulo actividad</label>
                 <input type="text" class="form-control" id="tituloAct" name="tituloAct">
+              </div>
+
+              <div>
+                <label for="idProyecto" class="col-form-label">Del proyecto:</label>
+                <select name="idProyecto" id="idProyecto" class="form-control">
+                  {% for proyecto in cronogramas %}
+                  <option value="{{ proyecto.idCronograma }}" id="opcionProyecto">{{ proyecto.nombreProyecto }}</option>
+                  {% else %}
+                  ,<option value="">No hay regstros</option>
+                  {% endfor %}
+                </select>
               </div>
 
               <div class="form-group">

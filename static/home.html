@@ -1,36 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
-
-    <link rel="stylesheet" href="css/donutChart.css">
-    
-    <script src="js/all.js"></script>
-    <script src="js/scrollreveal.min.js"></script>
-
-    
-
-</head>
-<body>
-    <div class="progress-pie-chart" data-percent="43">
-        <div class="ppc-progress">
-          <div class="ppc-progress-fill"></div>
+{% extendas 'layout.html'%}
+{% block title %}Proyectos{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/donutChart.css')}}">
+{% endblock %}
+{% block content%}
+  {% for proyecto in proyecto %}
+  <div class="progress-pie-chart" data-percent="43">
+    <div class="ppc-progress">
+      <div class="ppc-progress-fill"></div>
+    </div>
+    <div class="ppc-percents">
+      <div class="pcc-percents-wrapper">
+        <span>%</span>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <h3>No hay registros</h3>
+  {% endfor %}
+  <button id="botonAgregarProyec" class="btn btn-primary" data-target="#agregarProyecto" data-toggle="modal"> </button>
+  <div id="agregarProyecto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nuevoProyecto"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="nuevaActividad">Nuevo proyecto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="ppc-percents">
-          <div class="pcc-percents-wrapper">
-            <span>%</span>
-          </div>
+        <div class="modal-body">
+          <form action="iProyecto" method="POST">
+
+          </form>
         </div>
       </div>
-    
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/graficaPasteles.js" ></script> 
-</body>
-</html>
+    </div>
+  </div>
+{% endblock %}
