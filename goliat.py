@@ -28,7 +28,6 @@ def register():
     else:
         nombres = request.form['nombresUsua']
         apellidos = request.form['apellidosUsua']
-        fechaNacimiento = request.form['fechaNaciUsua']
         numeroCel = request.form['numeroCelUsua']
         trabajo = request.form['trabajoUsua']
         tituloUniversitario = request.form['gradoUniUsua']
@@ -42,8 +41,8 @@ def register():
         if clave == claveConfirm:
             claveCifrada = bcrypt.hashpw(clave, bcrypt.gensalt())
             empleados = mysql.connection.cursor()
-            empleados.execute("INSERT INTO usuario (nombresUsua, apellidosUsua, fechaNaciUsua, numeroCelUsua, trabajoUsua, gradoUniUsua, paisOrigenUsua, estadoOrigenUsua, ciudadOrigenUsua,  usuario, emailUsua, contraUsua) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                              (nombres.upper(), apellidos.upper(), fechaNacimiento, numeroCel, trabajo, tituloUniversitario, pais, estado, ciudad, usuario, email,  claveCifrada,))
+            empleados.execute("INSERT INTO usuario (nombresUsua, apellidosUsua, numeroCelUsua, trabajoUsua, gradoUniUsua, paisOrigenUsua, estadoOrigenUsua, ciudadOrigenUsua,  usuario, emailUsua, contraUsua) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                              (nombres.upper(), apellidos.upper(), numeroCel, trabajo, tituloUniversitario, pais, estado, ciudad, usuario, email,  claveCifrada,))
             mysql.connection.commit()
             empleados.close()
             return redirect(url_for('login'))
