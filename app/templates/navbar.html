@@ -1,0 +1,41 @@
+<!-- Navigation bar-->
+<nav class="navbar navbar-expand-sm ">
+
+
+    <a class="navbar-brand" href="#GOLIOAT"> <i class="fas fa-chess-knight"></i> Goliat </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">&#9776;</span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul id="inicioRegistro" class="navbar-nav ml-auto">
+            
+            
+            {% if session["nombresUsua"] %}
+            <li class="nav-item ">
+                <a class="nav-link navbar-brand">¡Bienvenido {{ session["nombresUsua"] }}!</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Cerrar sesion</a>
+            </li>
+
+
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#info">Informacion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contacto">Contactanos</a>
+            </li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+
+</nav>

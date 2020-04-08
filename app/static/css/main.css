@@ -1,0 +1,372 @@
+
+body{
+    font-family: NanumGothic;
+    color: #333;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+#inicio{
+    background: url(../img/mainImage.jpg);
+    min-height: 70vh;
+    background-size: cover;
+    background-attachment: fixed; 
+    
+}
+
+.inicio{
+    padding-top: 100px;
+}
+
+.inicioImagen{
+    padding-top: 100px;
+}
+.dark-overlay{
+    background-color: rgba(0, 0, 0, .3);
+    background-size: cover;
+    background-attachment: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 70vh;
+    color: #d9d9d9;
+}
+
+.navbar a{
+    color: #47FFB5;
+}
+nav{
+    border-bottom: #47FFB5 3px solid;
+    background: #198D95 ;
+    color: #47FFB5;
+}
+
+.inicio-derecha div{
+    background-color: #198D95;
+}
+
+#contactanos{
+    color: #333;
+    background-color: white;
+}
+
+input.btn.btn-outline-light.btn-block{
+    float: left;
+    width: 150px;
+    display: flex;
+    margin-left: 20px;
+}
+/* ########## Estilo pagina Actividades ##################*/
+.menu-lateral{
+    min-height: 68vh;
+    padding-left: 0px;
+}
+.graficasPastel{
+    
+    display: flex;
+    margin-top: 30px;
+    float: left;
+}
+
+.dotMenu{
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #d9d9d9;
+    float: right;
+    font-size: 25px;
+    padding: 0px;   
+    position: static;
+    height: 40px;
+}
+.dotMenu:hover{
+    background-color: #565656;
+}
+.grafica{
+    float: left;
+    position: static;
+
+}
+.contenedorMover{
+    float: left;
+    background-color: #f7f7f7;
+    margin-top: 150px;
+    margin-left: 180px;
+    position: absolute;
+}
+.mover{
+    padding: 5px;
+}
+.mover:hover{
+    background-color: #565656;
+}
+.iconoMover{
+    
+    color: #d9d9d9;
+}
+/* Estilo de la pagina Perfil*/
+.perfil{
+    margin-right: 100px;
+}
+
+#imagenPerfil{
+    background: url(../img/usuario.jpg);
+    float: right;    
+    width: 230px;
+    height: 180px;
+    margin-bottom: 20px;
+    
+    /*border-radius: 71%;*/
+}
+
+.areaInformacion{
+    margin-left: 0px;
+}
+.eliminarEditar{
+    margin-left: 10px;
+    float: right;
+}
+/* Pagina Actividades*/
+.addActividad{
+    width: auto;
+    float: right;
+    color: #f7f7f7;
+    padding: 4px;
+    font-size: 19px;
+}
+
+.espacio{
+    float: left;
+    padding: 4px 15px 4px 3px;
+}
+
+.espacio1{
+    float: right;
+    padding: 4px 8px 4px 3px;
+}
+
+.modalActividad{
+    color: black;
+}
+
+.radio{
+    padding: 10px 30px;
+}
+.anchoCard{
+    width: 20rem;
+    float: left;
+    margin: 8px 15px;
+    min-height: 24rem;
+}
+.card-body a{
+    margin: 18px 0;
+    float: right;
+}
+
+/* Estilo en pagina sub.html       */
+
+#encabezadoTabla{
+    background-color: #3f3f3f;
+    color: white;
+}
+
+.col1{
+    width: 50px;
+    height: auto;
+    text-align: center;
+}
+
+.col2{
+    width: 270px;
+    word-wrap: break-word;
+}
+
+.col3{
+    width: 40px;
+    height: auto;
+    text-align: center;
+}
+
+.col4{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col5{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col6{
+    width: 150px;
+    height: auto;
+    text-align: center;
+}
+
+.col7{
+    width: 280px;
+    height: auto;
+}
+
+.botonEditarEliminar{
+    width: 80px;
+    margin: 5px 0;
+}
+/* Estilo de la pagina Proyecto*/
+.proyecto{
+    display: inline;
+}
+#botonAgregarProyec{
+    display: block;
+}
+/* Uso general en en las paginas de los usuarios*/
+.normal{
+    background-color: #1f1f1f;
+    opacity: .8;
+    color: #ffffff;
+}
+.menu-lateral{
+    min-height: 68vh;
+    padding-left: 50px;
+}
+.paginasUsuario{
+    padding-top: 100px;
+    margin-left: 0px;
+    padding-left: 0px;
+    color: #1f1f1f;
+}
+
+.limpiar{
+    clear: both;
+}
+/*      Check-Box        */
+.containerLabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    
+    
+    
+    
+    
+  }
+  
+  /* Hide the browser's default checkbox */
+  .containerLabel input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom checkbox */
+.seleccionado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+.seleccionado:hover {
+    background-color: #ccc;
+  }
+  
+.containerLabel input:checked ~ .seleccionado {
+    background-color: #2196F3;
+}
+  
+  
+.seleccionado:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+
+.containerLabel input:checked ~ .seleccionado:after {
+    display: block;
+}
+  
+.containerLabel .seleccionado:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/*--------      Estilo pagina proyecto      --------- */
+.containerProyecto{
+    float: left;
+}
+.proyecto{
+    float: left;
+    position: static;
+}
+
+.anchoProyecto{
+    width: 20rem;
+    float: left;
+    min-height: 15rem;
+    margin: 10px 9px;
+}
+.dotMenuProyecto{
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #d9d9d9;
+    z-index: 2;
+    font-size: 25px;
+    padding: 0px;   
+    position: absolute;
+    height: 40px;
+    top: 10px;
+    left: 90px;
+}
+.dotMenuProyecto:hover{
+    background-color: #565656;
+}
+/* ---------------      Estilo pagina Grupo       ----------------*/
+.tamanioGrupo{
+    float: left;
+    min-height: 15rem;
+    width: 25rem;
+    margin: 5px 3px;
+}
+.tablaGrupos{
+    display: flex;
+    margin-top: 30px;
+    float: left;
+    
+}
+.grupo{
+    float: left;
+    position: static;
+}
+.dotMenuGrupo{
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #d9d9d9;
+    z-index: 2;
+    font-size: 25px;
+    padding: 0px;   
+    position: absolute;
+    height: 40px;
+    bottom: 24px;
+    right: 10px;
+    
+}
+
+.dotMenuGrupo:hover{
+    background-color: #565656;
+}
+.botonAgregar{
+    float: right;
+    
+}

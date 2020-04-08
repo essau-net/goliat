@@ -1,4 +1,4 @@
-#!/home/hesau2001/Developer/ProyectoGoliat/goliat-env/bin/python
+#!/home/hesau2001/Developer/goliat/goliat-env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

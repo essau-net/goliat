@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+    {% block title %} 
+        {{ super() }}
+        Iniciar Sesion 
+    {% endblock %}
+
+    {% block content %}
+        <!--INICIO-->
+        <section id="inicio">
+            <!-- ******   PRIMERA DIAPOSITIVA   *****-->
+            <div class="dark-overlay">
+                <div class="inicio inicio-izq">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 d-none d-sm-block">
+                                <h1 class="display-4 titulo"> Goliat </h1>
+                                <div class="d-flex flex-row">
+                                    <div class="0-4 parrafo align-self-start">
+                                        <p></p>
+                                        <p>Administra los diversos proyectos que tienes que hacer de manera
+                                            rapida y sencilla</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <div class="0-4 parrafo align-self-start">
+                                        <p>Goliat es una herramienta pensada en facilitar el procedimiento de
+                                            organizacion y administracion del tiempo en la realizacion de
+                                            proyectos</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex parrafo flex-row">
+                                    <div class="0-4 align-self-start">
+                                        <p> </p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- SEGUNDA COLUMNA -->
+                            <div class="col-lg-5 formulario inicio-derecha">
+                                <div class="card text-center" >
+                                    <div class="card-body">
+                                        <h3>Lorem ipsum dolor sit.</h3>
+                                        <p> Lorem ipsum dolor sit.</p>
+                                        <form action="/login" method="POST">
+                                        
+                                            {% with messages = get_flashed_messages() %}
+                                            {% if messages %}
+                                            {% for msg in messages %}
+
+                                            <div class="alert alert-danger" role="alert">
+                                                {{msg}} <a href="#" class="alert-link"></a>
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                            <div  class="form-group">
+                                                <input type="text" name="usuario" placeholder="Usuario"
+                                                    class="form-group form-control-lg" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="password" name="contraUsua" placeholder="Contraseña"
+                                                    class="form-group form-control-lg" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="submit" value="Iniciar Sesion"
+                                                    class="btn btn-outline-light btn-block">
+                                            </div>
+                                        </form>
+                                        <form method="GET" action="/register">
+                                            <div class="inicioRegistro form-group">
+                                                <input type="submit"  value="Registrsarse"
+                                                    class="btn btn-outline-light btn-block ">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <!-- START THE FEATURETTES -->
+        
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your
+                                mind.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
+                            euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
+                            tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
+                            style="width: 500px; height: 500px;"
+                            src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16d46c0d6a6%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16d46c0d6a6%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22184.890625%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                            data-holder-rendered="true">
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for
+                                yourself.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
+                            euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
+                            tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
+                            src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16d46c0d6a8%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16d46c0d6a8%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22184.890625%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                            data-holder-rendered="true" style="width: 500px; height: 500px;">
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
+                            euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
+                            tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
+                            src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16d46c0d6aa%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16d46c0d6aa%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22184.890625%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                            data-holder-rendered="true" style="width: 500px; height: 500px;">
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+        
+                <!-- /END THE FEATURETTES -->
+        
+            </div>
+        </div>
+    {% endblock %}

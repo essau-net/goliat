@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/hesau2001/Developer/ProyectoGoliat/goliat-env"
+set -gx VIRTUAL_ENV "/home/hesau2001/Developer/goliat/goliat-env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

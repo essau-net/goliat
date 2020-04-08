@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 
-from mysql_service import *
+#from .mysql_service import get_user
 
 
 class UserData:
@@ -15,5 +15,5 @@ class UserModel(UserMixin):
         self.password = user_data.password
 
     @staticmethod
-    def query(user_id)
+    def query(user_id):
         pass

@@ -1,4 +1,3 @@
 class Config:
     SECRET_KEY = 'SUPER SECRET'
-    DEBUG = True 
-    
+    #SQLALCHEMY_DATABASE_URI = 'mysql://{hesaumj}:{pr!m@v3r@$@}@{localhost}/{goliat}'

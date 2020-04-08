@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.hml' as wtf %}
+    
+
+    {% block title %}
+        {{ super() }}
+        Registrate
+    {% endblock %}
+
+
+    {% block content %}
+        <div class="container">
+            {{ wtf.quick_form(register_form) }}
+        </div>
+    {% endblock %}

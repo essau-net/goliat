@@ -1,18 +1,19 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 
 from .config import Config
-from .auth import auth
-from .models import UserModel
+# from .auth import auth
+# from .models import UserModel
 
 
-login_manger = LoginManager()
-login_manger.login_view = 'auth.login'
+# login_manger = LoginManager()
+# login_manger.login_view = 'auth.login'
 
-@login_manager.user_loader
-def load_user(username):
-    return UserModel.query(username)
+# @login_manger.user_loader
+# def load_user(username):
+#     return UserModel.query(username)
 
 def create_app():
     app = Flask(__name__)
@@ -20,8 +21,8 @@ def create_app():
 
     app.config.from_object(Config)
 
-    login_manager.init_app(app)
+    #login_manger.init_app(app)
 
-    app.register_blueprint(auth)
+    #app.register_blueprint(auth)
 
     return app
